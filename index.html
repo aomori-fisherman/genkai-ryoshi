@@ -252,6 +252,26 @@ body {
 .section-desc { color: var(--text-mid); font-size: 1rem; line-height: 1.8; max-width: 640px; }
 
 /* ── USP section ── */
+.profile-block {
+  display: grid; grid-template-columns: 340px 1fr; gap: 48px;
+  align-items: center; margin-bottom: 56px;
+}
+.profile-block img {
+  width: 100%; border-radius: 16px;
+  object-fit: cover; aspect-ratio: 3/4;
+  box-shadow: 0 12px 40px rgba(0,0,0,.12);
+}
+.profile-block .profile-text h3 {
+  font-size: 1.5rem; font-weight: 700; margin-bottom: 8px;
+}
+.profile-block .profile-text .profile-sub {
+  font-size: 0.9rem; color: var(--muted); margin-bottom: 20px;
+}
+.profile-block .profile-text p { line-height: 1.9; color: var(--text); }
+@media (max-width: 768px) {
+  .profile-block { grid-template-columns: 1fr; }
+  .profile-block img { max-width: 280px; margin: 0 auto; display: block; }
+}
 .usp-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
   margin-top: 48px;
@@ -679,6 +699,21 @@ body {
       ネットにあふれる机上のダイエット理論ではなく、
       漁師の現場知識と大会選手の身体づくりから生まれた「再現できる減量飯」です。
     </p>
+    <div class="profile-block">
+      <img src="images/profile.jpg" alt="川村伎海 大会ステージ">
+      <div class="profile-text">
+        <h3>川村伎海（かわむら たくみ）</h3>
+        <p class="profile-sub">青森県平内町 / ホタテ漁師 / フィジーク大会出場</p>
+        <p>
+          陸奥湾でホタテ漁を10年。午前は海、午後はジム。
+          「漁師がフィジーク大会に出る」と言ったら笑われた。
+          それでも72kgから60kgに絞り、ステージに立った。<br><br>
+          使ったのは特別なサプリでも食事管理アプリでもない。
+          魚を自分で獲って、自分で料理して、食い続けただけ。
+          そのレシピをそのまま出す。
+        </p>
+      </div>
+    </div>
     <div class="usp-grid">
       <div class="usp-card">
         <div class="usp-icon">🐟</div>
