@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>レシピ一覧｜限界漁師プロジェクト – 高タンパク減量飯 PFC付き</title>
+<meta name="description" content="限界漁師・Takumiの高タンパク減量飯レシピ一覧。全品PFC（タンパク質・脂質・炭水化物）付き。魚料理・肉料理・丼・中華まで幅広くカバー。"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho:wght@400;600;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --ink:#0a0f1a;--sea-deep:#0b2942;--sea-mid:#144d6f;--sea-light:#1a7a9e;
+  --sea-bright:#22b8cf;--sea-pale:#e0f7fa;--ember:#e85d26;--ember-light:#ff7e47;
+  --sand:#f5e6c8;--sand-light:#faf4e8;--bone:#fefcf7;
+  --text:#1a1a2e;--text-mid:#4a4a5a;--text-light:#7a7a8a;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Zen Kaku Gothic New',sans-serif;color:var(--text);background:var(--bone);-webkit-font-smoothing:antialiased;}
+.font-mincho{font-family:'Shippori Mincho',serif;}
+.container{max-width:1200px;margin:0 auto;padding:0 24px;}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:100;background:rgba(10,15,26,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-brand{font-family:'Shippori Mincho',serif;font-weight:800;font-size:1.2rem;color:#fff;text-decoration:none;}
+.nav-brand span{color:var(--sea-bright);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.85rem;font-weight:500;transition:color .2s;}
+.nav-links a:hover{color:var(--sea-bright);}
+.nav-cta{background:var(--ember);color:#fff;border:none;border-radius:6px;padding:8px 20px;font-size:.85rem;font-weight:700;cursor:pointer;text-decoration:none;transition:background .2s;}
+.nav-cta:hover{background:var(--ember-light);}
+.mobile-toggle{display:none;background:none;border:none;cursor:pointer;color:#fff;font-size:1.5rem;}
+
+/* Page hero */
+.page-hero{background:linear-gradient(160deg,var(--ink),var(--sea-deep));padding:80px 0 60px;text-align:center;}
+.page-hero h1{font-family:'Shippori Mincho',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;margin-bottom:12px;}
+.page-hero p{color:rgba(255,255,255,.65);font-size:1rem;max-width:560px;margin:0 auto;}
+.breadcrumb{padding:12px 0;font-size:.8rem;color:var(--text-light);}
+.breadcrumb a{color:var(--text-light);text-decoration:none;transition:color .2s;}
+.breadcrumb a:hover{color:var(--sea-light);}
+
+/* Filter */
+.filter-bar{padding:20px 0;border-bottom:1px solid rgba(0,0,0,.05);background:#fff;position:sticky;top:64px;z-index:50;}
+.filter-inner{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+.filter-btn{padding:8px 20px;border-radius:100px;font-size:.82rem;font-weight:600;border:1px solid rgba(0,0,0,.1);background:#fff;color:var(--text-mid);cursor:pointer;transition:all .2s;}
+.filter-btn:hover,.filter-btn.active{background:var(--sea-deep);color:#fff;border-color:var(--sea-deep);}
+.filter-search{flex:1;min-width:200px;max-width:320px;margin-left:auto;padding:8px 16px;border-radius:8px;border:1px solid rgba(0,0,0,.1);font-size:.85rem;outline:none;transition:border-color .2s;}
+.filter-search:focus{border-color:var(--sea-bright);}
+
+/* Recipes grid */
+.recipes-section{padding:40px 0 80px;}
+.recipe-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.recipe-card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid rgba(0,0,0,.05);transition:transform .2s,box-shadow .2s;}
+.recipe-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.08);}
+.recipe-img{height:200px;overflow:hidden;position:relative;}
+.recipe-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.recipe-card:hover .recipe-img img{transform:scale(1.06);}
+.recipe-tag{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);color:#fff;font-size:.7rem;font-weight:700;padding:4px 12px;border-radius:100px;}
+.recipe-type{position:absolute;top:12px;right:12px;font-size:.68rem;font-weight:700;padding:4px 10px;border-radius:100px;}
+.recipe-type.genryo{background:rgba(34,184,207,.85);color:#fff;}
+.recipe-type.zouryo{background:rgba(232,93,38,.85);color:#fff;}
+.recipe-body{padding:20px;}
+.recipe-body h3{font-size:1.05rem;font-weight:700;margin-bottom:6px;}
+.recipe-body p{font-size:.82rem;color:var(--text-mid);line-height:1.6;margin-bottom:14px;}
+.recipe-meta{display:flex;gap:12px;font-size:.75rem;color:var(--text-light);margin-bottom:14px;}
+.recipe-pfc{display:flex;gap:16px;font-size:.75rem;font-weight:600;padding-top:14px;border-top:1px solid rgba(0,0,0,.05);}
+.recipe-pfc span{display:flex;align-items:center;gap:4px;}
+.pfc-p{color:var(--sea-light);}.pfc-f{color:#ca8a04;}.pfc-c{color:var(--ember);}
+.recipe-pfc .kcal{margin-left:auto;color:var(--text-light);}
+.recipe-link{display:block;text-align:center;padding:10px;background:var(--sea-deep);color:#fff;font-size:.85rem;font-weight:600;text-decoration:none;border-radius:8px;margin-top:14px;transition:background .2s;}
+.recipe-link:hover{background:var(--sea-mid);}
+
+/* CTA band */
+.cta-band{background:linear-gradient(90deg,var(--ember),var(--ember-light));padding:48px 0;text-align:center;}
+.cta-band h2{font-family:'Shippori Mincho',serif;font-size:1.6rem;font-weight:800;color:#fff;margin-bottom:8px;}
+.cta-band p{color:rgba(255,255,255,.85);margin-bottom:24px;font-size:.95rem;}
+.cta-band a{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--ember);padding:14px 32px;border-radius:8px;font-weight:700;text-decoration:none;transition:transform .15s;}
+.cta-band a:hover{transform:translateY(-2px);}
+
+/* Footer */
+.footer{background:var(--ink);color:rgba(255,255,255,.5);padding:40px 0;text-align:center;font-size:.8rem;}
+.footer a{color:rgba(255,255,255,.5);text-decoration:none;}
+.footer a:hover{color:var(--sea-bright);}
+
+@media(max-width:900px){
+  .recipe-grid{grid-template-columns:1fr 1fr;}
+  .nav-links{display:none;}
+  .mobile-toggle{display:block;}
+}
+@media(max-width:600px){
+  .recipe-grid{grid-template-columns:1fr;}
+  .filter-search{max-width:100%;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-brand">限界漁師<span>PROJECT</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">ホーム</a></li>
+      <li><a href="recipes.html" style="color:var(--sea-bright);">レシピ</a></li>
+      <li><a href="journal.html">減量日記</a></li>
+      <li><a href="index.html#product">有料コンテンツ</a></li>
+      <li><a href="index.html#story">Takumiの物語</a></li>
+    </ul>
+    <a href="index.html#lead" class="nav-cta">無料PDF受け取る</a>
+    <button class="mobile-toggle" aria-label="メニュー">☰</button>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>レシピ一覧</h1>
+    <p>全品PFC付き。漁師の一次情報×減量理論で生まれた高タンパクレシピ集。</p>
+  </div>
+</section>
+
+<div class="container breadcrumb">
+  <a href="index.html">ホーム</a> ／ <span>レシピ一覧</span>
+</div>
+
+<div class="filter-bar">
+  <div class="container filter-inner">
+    <button class="filter-btn active">すべて</button>
+    <button class="filter-btn">魚料理</button>
+    <button class="filter-btn">肉料理</button>
+    <button class="filter-btn">丼もの</button>
+    <button class="filter-btn">中華・洋食</button>
+    <button class="filter-btn">増量飯</button>
+    <input class="filter-search" type="text" placeholder="レシピ名で検索..."/>
+  </div>
+</div>
+
+<section class="recipes-section">
+  <div class="container">
+    <div class="recipe-grid">
+
+      <!-- 1 -->
+      <div class="recipe-card">
+        <div class="recipe-img">
+          <img src="images/04_taimeshi.jpg" alt="鯛めし"/>
+          <span class="recipe-tag">魚料理</span>
+          <span class="recipe-type genryo">減量飯</span>
+        </div>
+        <div class="recipe-body">
+          <h3>鯛めし</h3>
+          <p>一尾丸ごと炊き込む漁師の本格鯛めし。旨味を余さず味わう贅沢な一品。</p>
+          <div class="recipe-meta"><span>⏱ 60分</span><span>中級</span><span>4人分</span></div>
+          <div class="recipe-pfc">
+            <span class="pfc-p">P 22g</span><span class="pfc-f">F 4g</span><span class="pfc-c">C 58g</span><span class="kcal">356kcal</span>
+          </div>
+          <a href="recipe-01-taimeshi.html" class="recipe-link">レシピを見る →</a>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="recipe-card">
+        <div class="recipe-img">
+          <img src="images/01_mebaru.jpg" alt="メバルの煮つけ"/>
+          <span class="recipe-tag">魚料理</span>
+          <span class="recipe-type genryo">減量飯</span>
+        </div>
+        <div class="recipe-body">
+          <h3>メバルの煮つけ</h3>
+          <p>甘さ控えめで魚の旨味が主役。煮汁を煮詰めすぎないのが漁師のコツ。</p>
+          <div class="recipe-meta"><span>⏱ 25分</span><span>初級</span><span>1人分</span></div>
+          <div class="recipe-pfc">
+            <span class="pfc-p">P 27.3g</span><span class="pfc-f">F 5.3g</span><span class="pfc-c">C 9.1g</span><span class="kcal">193kcal</span>
+          </div>
+          <a href="recipe-02-mebaru.html" class="recipe-link">レシピを見る →</a>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="recipe-card">
+        <div class="recipe-img">
+          <img src="images/02_madai.jpg" alt="真鯛のカレー粉ホイル焼き"/>
+          <span class="recipe-tag">魚料理</span>
+          <span class="recipe-type genryo">減量飯</span>
+        </div>
+        <div class="recipe-body">
+          <h3>真鯛のカレー粉ホイル焼き</h3>
+          <p>スパイスの風味で満足感アップ。蒸し汁ごと食べるのが漁師流。</p>
+          <div class="recipe-meta"><span>⏱ 20分</span><span>初級</span><span>1人分</span></div>
+          <div class="recipe-pfc">
+            <span class="pfc-p">P 24.7g</span><span class="pfc-f">F 12.0g</span><span class="pfc-c">C 1.1g</span><span class="kcal">211kcal</span>
+          </div>
+          <a href="recipe-03-madai.html" class="recipe-link">レシピを見る →</a>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="recipe-card">
+        <div class="recipe-img">
+          <img src="images/03_karei.jpg" alt="カレイの味噌ホイル焼き"/>
+          <span class="recipe-tag">魚料理</span>
+          <span class="recipe-type genryo">減量飯</span>
+        </div>
+        <div class="recipe-body">
+          <h3>カレイの味噌ホイル焼き</h3>
+          <p>味噌のコクと蒸し焼きのふっくら感。洗い物も少なく時短にも◎。</p>
+          <div class="recipe-meta"><span>⏱ 20分</span><span>初級</span><span>1人分</span></div>
+          <div class="recipe-pfc">
+            <span class="pfc-p">P 33.8g</span><span class="pfc-f">F 5.9g</span><span class="pfc-c">C 10.1g</span><span class="kcal">228kcal</span>
+          </div>
+          <a href="recipe-04-karei.html" class="recipe-link">レシピを見る →</a>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="recipe-card">
+        <div class="recipe-img">
+          <img src="images/08_pasta.jpg" alt="シーフードパスタ"/>
+          <span class="recipe-tag">洋食</span>
+          <span class="recipe-type genryo">減量飯</span>
+        </div>
+        <div class="recipe-body">
+          <h3>シーフードパスタ</h3>
+          <p>海の旨味たっぷりの減量向けパスタ。茹で汁を活かして乳化させるのがコツ。</p>
+          <div class="recipe-meta"><span>⏱ 25分</span><span>初級</span><span>1人分</span></div>
+          <div class="recipe-pfc">
+            <span class="pfc-p">P 34.3g</span><span class="pfc-f">F 19.6g</span><span class="pfc-c">C 80.4g</span><span class="kcal">635kcal</span>
+          </div>
+          <a href="recipe-05-pasta.html" class="recipe-link">レシピを見る →</a>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="recipe-card">
+        <div class="recipe-img">
+          <img src="images/05_yodare.jpg" alt="よだれ鶏"/>
+          <span class="recipe-tag">肉料理</span>
+          <span class="recipe-type genryo">減量飯</span>
+        </div>
+        <div class="recipe-body">
+          <h3>よだれ鶏</h3>
+          <p>もも肉をジューシーに仕上げ、旨辛タレをたっぷりかけた本格中華。</p>
+          <div class="recipe-meta"><span>⏱ 25分</span><span>初級</span><span>1人分</span></div>
+          <div class="recipe-pfc">
+            <span class="pfc-p">P 25.4g</span><span class="pfc-f">F 28.4g</span><span class="pfc-c">C 8.9g</span><span class="kcal">393kcal</span>
+          </div>
+          <a href="recipe-06-yodare.html" class="recipe-link">レシピを見る →</a>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="recipe-card">
+        <div class="recipe-img">
+          <img src="images/06_pork_ankake.jpg" alt="豚ももの醤油あんかけ"/>
+          <span class="recipe-tag">肉料理</span>
+          <span class="recipe-type zouryo">増量飯</span>
+        </div>
+        <div class="recipe-body">
+          <h3>豚ももの醤油あんかけ</h3>
+          <p>脂身の少ない豚ももをとろみあんで仕上げた高タンパク定番飯。</p>
+          <div class="recipe-meta"><span>⏱ 25分</span><span>初級</span><span>1人分</span></div>
+          <div class="recipe-pfc">
+            <span class="pfc-p">P 33.4g</span><span class="pfc-f">F 7.5g</span><span class="pfc-c">C 14.6g</span><span class="kcal">259kcal</span>
+          </div>
+          <a href="recipe-07-ankake.html" class="recipe-link">レシピを見る →</a>
+        </div>
+      </div>
+
+      <!-- 8 -->
+      <div class="recipe-card">
+        <div class="recipe-img">
+          <img src="images/07_enoki.jpg" alt="豚もものえのき巻き"/>
+          <span class="recipe-tag">肉料理</span>
+          <span class="recipe-type genryo">減量飯</span>
+        </div>
+        <div class="recipe-body">
+          <h3>豚もものえのき巻き</h3>
+          <p>えのきを豚ももで巻いた照り焼き。見た目も◎でタンパク質45gの最強減量飯。</p>
+          <div class="recipe-meta"><span>⏱ 20分</span><span>初級</span><span>1人分</span></div>
+          <div class="recipe-pfc">
+            <span class="pfc-p">P 45.7g</span><span class="pfc-f">F 7.4g</span><span class="pfc-c">C 12.8g</span><span class="kcal">301kcal</span>
+          </div>
+          <a href="recipe-08-enoki.html" class="recipe-link">レシピを見る →</a>
+        </div>
+      </div>
+
+      <!-- 9 -->
+      <div class="recipe-card">
+        <div class="recipe-img">
+          <img src="images/10_magutaku.jpg" alt="まぐたくケーキ"/>
+          <span class="recipe-tag">魚料理</span>
+          <span class="recipe-type genryo">減量飯</span>
+        </div>
+        <div class="recipe-body">
+          <h3>まぐたくケーキ</h3>
+          <p>まぐろとたくあんを使ったケーキ風寿司。SNS映えする限界漁師の番外編。</p>
+          <div class="recipe-meta"><span>⏱ 20分</span><span>中級</span><span>1人分</span></div>
+          <div class="recipe-pfc">
+            <span class="pfc-p">P 53.1g</span><span class="pfc-f">F 26.2g</span><span class="pfc-c">C 82.1g</span><span class="kcal">776kcal</span>
+          </div>
+          <a href="recipe-09-magutaku.html" class="recipe-link">レシピを見る →</a>
+        </div>
+      </div>
+
+      <!-- 10 -->
+      <div class="recipe-card">
+        <div class="recipe-img">
+          <img src="images/09_pizza.jpg" alt="タンドリーチキンピザ"/>
+          <span class="recipe-tag">肉料理</span>
+          <span class="recipe-type zouryo">増量飯</span>
+        </div>
+        <div class="recipe-body">
+          <h3>タンドリーチキンピザ</h3>
+          <p>ギリシャヨーグルトで漬け込んだスパイシーチキンをのせた番外編ピザ。</p>
+          <div class="recipe-meta"><span>⏱ 40分</span><span>中級</span><span>1人分</span></div>
+          <div class="recipe-pfc">
+            <span class="pfc-p">P 37.5g</span><span class="pfc-f">F 27.7g</span><span class="pfc-c">C 61.5g</span><span class="kcal">645kcal</span>
+          </div>
+          <a href="recipe-10-pizza.html" class="recipe-link">レシピを見る →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <h2>全60品のレシピ＋12週間減量理論を手に入れる</h2>
+    <p>有料PDF完全版では、写真・工程・PFC・減量/増量アレンジまで全て収録。</p>
+    <a href="index.html#product">完全版PDF ¥3,000 を見る →</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p>© 2026 限界漁師プロジェクト. All rights reserved. ｜ <a href="index.html">ホーム</a> ｜ <a href="terms.html">利用規約</a> ｜ <a href="privacy.html">プライバシーポリシー</a></p>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
