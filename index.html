@@ -535,22 +535,30 @@ body {
 .timeline-item h4 { font-size: .9rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
 .timeline-item p { font-size: .8rem; color: rgba(255,255,255,.55); }
 
-/* ── FAQ ── */
-.faq-list { max-width: 720px; margin: 40px auto 0; }
-.faq-item {
-  border-bottom: 1px solid rgba(0,0,0,.06); padding: 20px 0;
+/* ── Countdown ── */
+.countdown-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  max-width: 800px; margin: 40px auto 0;
 }
-.faq-q {
-  font-weight: 700; font-size: .95rem; cursor: pointer;
-  display: flex; justify-content: space-between; align-items: center;
+.countdown-card {
+  background: #fff; border: 1px solid rgba(0,0,0,.06);
+  border-radius: 14px; padding: 28px 16px; text-align: center;
 }
-.faq-q::after { content: '+'; font-size: 1.2rem; color: var(--text-light); transition: transform .2s; }
-.faq-item.open .faq-q::after { transform: rotate(45deg); }
-.faq-a {
-  max-height: 0; overflow: hidden; transition: max-height .3s ease;
-  font-size: .88rem; color: var(--text-mid); line-height: 1.7;
+.countdown-number {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(2rem, 5vw, 3rem); font-weight: 800;
+  color: var(--ember); line-height: 1;
 }
-.faq-item.open .faq-a { max-height: 300px; padding-top: 12px; }
+.countdown-unit {
+  font-size: .75rem; color: var(--text-light); margin-top: 4px;
+}
+.countdown-label {
+  font-size: .82rem; font-weight: 700; color: var(--text-mid); margin-top: 12px;
+}
+@media (max-width: 600px) {
+  .countdown-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .countdown-card { padding: 20px 12px; }
+}
 
 /* ── Footer ── */
 .footer {
@@ -647,7 +655,7 @@ body {
       <li><a href="#training">トレーニングメニュー</a></li>
       <li><a href="#product">有料コンテンツ</a></li>
       <li><a href="#story">Takumiの物語</a></li>
-      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#countdown">カウントダウン</a></li>
     </ul>
     <a href="#lead" class="nav-cta">無料PDF受け取る</a>
     <button class="mobile-toggle" id="mobileToggle" aria-label="メニュー">☰</button>
@@ -661,7 +669,7 @@ body {
   <a href="#training">トレーニングメニュー</a>
   <a href="#product">有料コンテンツ</a>
   <a href="#story">Takumiの物語</a>
-  <a href="#faq">FAQ</a>
+  <a href="#countdown">大会カウントダウン</a>
   <a href="#lead" style="color:var(--ember);">無料PDF受け取る</a>
 </div>
 
@@ -1078,31 +1086,32 @@ body {
   </div>
 </section>
 
-<!-- FAQ -->
-<section class="section" id="faq">
+<!-- Countdown -->
+<section class="section" id="countdown">
   <div class="container" style="text-align:center;">
-    <span class="section-label">FAQ</span>
-    <h2 class="section-title">よくある質問</h2>
-    <div class="faq-list" style="text-align:left;">
-      <div class="faq-item">
-        <div class="faq-q">料理初心者でもレシピは作れますか？</div>
-        <div class="faq-a">はい。全レシピに材料・分量・工程を詳しく掲載し、写真付きで解説しています。魚の下処理も基礎から丁寧に説明しているので、初めての方でも安心して取り組めます。</div>
+    <span class="section-label">Countdown</span>
+    <h2 class="section-title">大会まで、あと何日。</h2>
+    <p class="section-desc">2026年8月22日 フィジーク大会。漁師の身体がどこまで変わるか、リアルタイムで記録中。</p>
+    <div class="countdown-grid">
+      <div class="countdown-card">
+        <div class="countdown-number" id="daysLeft"></div>
+        <div class="countdown-unit">days</div>
+        <div class="countdown-label">大会まで</div>
       </div>
-      <div class="faq-item">
-        <div class="faq-q">どこで購入できますか？</div>
-        <div class="faq-a">noteの有料記事として販売しています。noteのアカウントがあれば購入後すぐに読めます。</div>
+      <div class="countdown-card">
+        <div class="countdown-number">63.3</div>
+        <div class="countdown-unit">kg</div>
+        <div class="countdown-label">現在の体重</div>
       </div>
-      <div class="faq-item">
-        <div class="faq-q">無料版と有料版の違いは？</div>
-        <div class="faq-a">¥500のnote記事では、12kgの減量で学んだ失敗と7つのルール、1週間の食事プラン、減量飯レシピ7品（全品PFC・カロリー付き）を公開しています。無料レシピ10品と合わせて使う設計です。</div>
+      <div class="countdown-card">
+        <div class="countdown-number">5</div>
+        <div class="countdown-unit">posts</div>
+        <div class="countdown-label">note記事</div>
       </div>
-      <div class="faq-item">
-        <div class="faq-q">魚以外のレシピもありますか？</div>
-        <div class="faq-a">もちろんです。鶏むね肉のトマト煮、オーバーナイトオーツなど魚以外のレシピも収録しています。全品PFC・カロリー付きです。</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">返金はできますか？</div>
-        <div class="faq-a">デジタルコンテンツの性質上、ダウンロード後の返金は原則としてお受けしていません。まずは無料PDF 10品をお試しいただき、内容に納得いただいた上でのご購入をおすすめしています。</div>
+      <div class="countdown-card">
+        <div class="countdown-number">7</div>
+        <div class="countdown-unit">sessions</div>
+        <div class="countdown-label">3月のジム</div>
       </div>
     </div>
   </div>
@@ -1137,7 +1146,7 @@ body {
       <div>
         <h4>サポート</h4>
         <ul class="footer-links">
-          <li><a href="#faq">よくある質問</a></li>
+          <li><a href="#countdown">カウントダウン</a></li>
           <li><a href="https://x.com/genkai_ryoshi" target="_blank">お問い合わせ（X）</a></li>
           <li><a href="terms.html">利用規約</a></li>
           <li><a href="privacy.html">プライバシーポリシー</a></li>
@@ -1174,12 +1183,12 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// FAQ accordion
-document.querySelectorAll('.faq-q').forEach(q => {
-  q.addEventListener('click', () => {
-    q.parentElement.classList.toggle('open');
-  });
-});
+// Countdown
+const comp = new Date('2026-08-22T00:00:00+09:00');
+const now = new Date();
+const diff = Math.ceil((comp - now) / (1000 * 60 * 60 * 24));
+const el = document.getElementById('daysLeft');
+if (el) el.textContent = diff > 0 ? diff : '0';
 
 // Lead form mock
 document.querySelectorAll('.lead-form button').forEach(btn => {
