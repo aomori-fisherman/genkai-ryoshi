@@ -300,7 +300,7 @@ body {
 
 /* ── Training menu ── */
 .training-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;
   margin-top: 40px;
 }
 .training-card {
@@ -947,18 +947,19 @@ body {
     <span class="section-label" style="color:var(--sea-bright);">Training Menu</span>
     <h2 class="section-title" style="color:#fff;">現在のトレーニングメニュー</h2>
     <p class="section-desc" style="color:rgba(255,255,255,.6);">
-      PPL（Push / Pull / Legs）分割・週4回。5分割→4分割→PPLと試行錯誤した結果、今はこの形に落ち着いている。
+      PPL（Push / Pull / Legs）5分割。背中を「広がり」と「厚み」で分けたのが今の形。
     </p>
     <div class="training-grid">
       <div class="training-card">
         <h3>Push①（胸メイン）</h3>
         <div class="training-sub">Chest focused</div>
         <ul>
-          <li>Bench Press</li>
+          <li>BP</li>
           <li>Smith Incline Press</li>
           <li>Dips</li>
           <li>Cable Press Down</li>
-          <li>Smith Back Press</li>
+          <li>Machine Incline Fly</li>
+          <li>Machine Shoulder Press</li>
         </ul>
       </div>
       <div class="training-card">
@@ -966,28 +967,42 @@ body {
         <div class="training-sub">Shoulder focused</div>
         <ul>
           <li>Seated Shoulder Press</li>
-          <li>Narrow Bench Press</li>
-          <li>Machine Shoulder Press</li>
-          <li>Side Raise</li>
+          <li>Narrow BP</li>
+          <li>Smith Back Press</li>
+          <li>Skull Crusher</li>
           <li>Incline French Press</li>
+          <li>Side Raise</li>
         </ul>
       </div>
       <div class="training-card">
-        <h3>Pull（背中・二頭）</h3>
-        <div class="training-sub">Back &amp; Biceps</div>
+        <h3>Pull①（広がり）</h3>
+        <div class="training-sub">Back Width</div>
         <ul>
           <li>Chinning</li>
+          <li>Cable Pull Over</li>
+          <li>Machine Pull Down</li>
+          <li>Lat Pull Down</li>
+          <li>Barbell Curl</li>
+          <li>Machine Arm Curl</li>
+        </ul>
+      </div>
+      <div class="training-card">
+        <h3>Pull②（厚み）</h3>
+        <div class="training-sub">Back Thickness</div>
+        <ul>
           <li>Bent Over Row</li>
           <li>Machine Row</li>
-          <li>Lat Pull Down</li>
-          <li>One Hand T-bar Row</li>
-          <li>Barbell Curl</li>
+          <li>One Hand T-Bar Row</li>
+          <li>Incline DB Row</li>
+          <li>Incline DB Curl or BP</li>
         </ul>
       </div>
       <div class="training-card">
         <h3>Legs（脚）</h3>
         <div class="training-sub">Lower body</div>
         <ul>
+          <li>Abduction</li>
+          <li>Adduction</li>
           <li>Squat</li>
           <li>Leg Press</li>
           <li>Hip Thrust</li>
