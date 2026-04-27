@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>きんまご見積もり</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#1a1a2e;color:#e8e8f0;font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans',sans-serif;font-size:16px;line-height:1.5;padding:0 0 190px 0}
+header{background:#0f3460;padding:14px 16px;display:flex;align-items:center;gap:10px;border-bottom:2px solid #ff6b35;position:sticky;top:0;z-index:10}
+header h1{font-size:18px;font-weight:700;color:#ff6b35}
+.badge{font-size:11px;background:#cc5228;color:#fff;padding:2px 7px;border-radius:10px;font-weight:600}
+.sec{margin:14px 12px;background:#16213e;border-radius:12px;border:1px solid #2a2a4a;overflow:hidden}
+.sec-h{background:#0f3460;padding:10px 14px;font-size:13px;font-weight:700;color:#ff6b35;border-bottom:1px solid #2a2a4a}
+.sec-b{padding:12px 14px}
+.rl{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;border:1.5px solid #2a2a4a;margin-bottom:6px;font-size:15px}
+.rl.on{border-color:#ff6b35;background:rgba(255,107,53,0.08)}
+.rl input{width:20px;height:20px;accent-color:#ff6b35;flex-shrink:0}
+.rl .sub{margin-left:auto;font-size:12px;color:#9999bb}
+select{width:100%;padding:12px 14px;background:#0f3460;color:#e8e8f0;border:1.5px solid #2a2a4a;border-radius:8px;font-size:16px}
+.cat{font-size:12px;font-weight:700;color:#9999bb;margin:14px 0 8px;padding-left:8px;border-left:3px solid #ff6b35}
+.cat:first-child{margin-top:0}
+.dvd{height:1px;background:#2a2a4a;margin:12px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.card{background:#0f3460;border:1.5px solid #2a2a4a;border-radius:10px;padding:10px}
+.card.on{border-color:#ff6b35;background:rgba(255,107,53,0.1)}
+.card-top{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.card-top input{width:20px;height:20px;accent-color:#ff6b35;flex-shrink:0}
+.card-name{font-size:14px;font-weight:600;flex:1;line-height:1.3}
+.card-meta{font-size:11px;color:#9999bb;margin-bottom:8px}
+.rc{color:#f7c54a;font-weight:600}
+.qty{display:flex;align-items:center;gap:8px}
+.qb{width:40px;height:40px;border:none;border-radius:8px;background:#1a1a2e;color:#ff6b35;font-size:24px;font-weight:700;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;cursor:pointer}
+.qb:active{background:#ff6b35;color:#fff}
+.qv{min-width:30px;text-align:center;font-size:18px;font-weight:700}
+.truck-bar-wrap{background:#0f3460;border-radius:6px;height:12px;overflow:hidden;margin-top:6px}
+.truck-bar{height:100%;background:#ff6b35;border-radius:6px;transition:width 0.3s;min-width:2px}
+.truck-bar.over{background:#e05555}
+.tv{font-size:20px;font-weight:700;color:#ff6b35}
+.tm{display:flex;align-items:center;gap:10px;margin-top:12px}
+.tm label{font-size:13px;color:#9999bb}
+.tm input{width:70px;padding:8px 10px;background:#0f3460;color:#e8e8f0;border:1.5px solid #2a2a4a;border-radius:8px;font-size:16px;text-align:center}
+.rbtn{padding:8px 12px;background:#0f3460;color:#9999bb;border:1.5px solid #2a2a4a;border-radius:8px;font-size:13px;cursor:pointer}
+.sr{display:flex;align-items:center;gap:12px}
+.sr input[type=range]{flex:1;accent-color:#ff6b35;height:6px}
+.sv{font-size:20px;font-weight:700;color:#ff6b35;min-width:52px;text-align:right}
+.sl{display:flex;justify-content:space-between;font-size:11px;color:#9999bb;margin-top:4px}
+#footer{position:fixed;bottom:0;left:0;right:0;background:#0d1020;border-top:2px solid #ff6b35;padding:10px 14px 18px;z-index:20}
+.fm{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:6px}
+.fp-l{font-size:12px;color:#9999bb}
+.fp{font-size:26px;font-weight:800;color:#ff6b35;line-height:1.1}
+.fpr{text-align:right}
+.fpr-l{font-size:12px;color:#9999bb}
+.fpr-v{font-size:18px;font-weight:700;color:#4caf88}
+.fd{display:flex;gap:8px;flex-wrap:wrap;font-size:12px;color:#9999bb;margin-bottom:4px}
+.ft{font-size:12px;color:#9999bb}
+.ft strong{color:#e8e8f0}
+</style>
+</head>
+<body>
+
+<header><h1>きんまご 見積もり</h1><span class="badge">社内用</span></header>
+
+<div class="sec">
+<div class="sec-h">1. エリア</div>
+<div class="sec-b">
+<label class="rl on" onclick="setArea(this,650)"><input type="radio" name="area" value="650" checked>青森駅前・中心街<span class="sub">&yen;650</span></label>
+<label class="rl" onclick="setArea(this,570)"><input type="radio" name="area" value="570">浜田・桂木<span class="sub">&yen;570</span></label>
+<label class="rl" onclick="setArea(this,580)"><input type="radio" name="area" value="580">筒井・佃<span class="sub">&yen;580</span></label>
+<label class="rl" onclick="setArea(this,990)"><input type="radio" name="area" value="990">浪岡<span class="sub">&yen;990</span></label>
+<label class="rl" onclick="setArea(this,600)"><input type="radio" name="area" value="600">東青森・矢田前<span class="sub">&yen;600</span></label>
+<label class="rl" onclick="setArea(this,650)"><input type="radio" name="area" value="650">沖館・西エリア<span class="sub">&yen;650</span></label>
+</div>
+</div>
+
+<div class="sec">
+<div class="sec-h">2. 人工数</div>
+<div class="sec-b">
+<label class="rl on" onclick="setWorkers(this,1)"><input type="radio" name="workers" value="1" checked>1人工<span class="sub">時給 &yen;2,000</span></label>
+<label class="rl" onclick="setWorkers(this,2)"><input type="radio" name="workers" value="2">2人工<span class="sub">時給 &yen;4,000</span></label>
+</div>
+</div>
+
+<div class="sec">
+<div class="sec-h">3. 作業時間</div>
+<div class="sec-b">
+<select id="hrs" onchange="S.hours=parseInt(this.value);calc()">
+<option value="2">2時間</option>
+<option value="3">3時間</option>
+<option value="4" selected>4時間（半日）</option>
+<option value="6">6時間</option>
+<option value="8">8時間（1日）</option>
+</select>
+</div>
+</div>
+
+<div class="sec">
+<div class="sec-h">4. 品目</div>
+<div class="sec-b">
+
+<div class="cat">大型家具</div>
+<div class="grid">
+<div class="card" data-pct="30" data-rc="0">
+  <div class="card-top"><input type="checkbox" onchange="toggleCard(this)"><span class="card-name" onclick="tapCard(this)">タンス</span></div>
+  <div class="card-meta">占有率 30%/個</div>
+  <div class="qty"><button type="button" class="qb" onclick="qMinus(this)">-</button><div class="qv">1</div><button type="button" class="qb" onclick="qPlus(this)">+</button></div>
+</div>
+<div class="card" data-pct="40" data-rc="0">
+  <div class="card-top"><input type="checkbox" onchange="toggleCard(this)"><span class="card-name" onclick="tapCard(this)">ベッド</span></div>
+  <div class="card-meta">占有率 40%/個</div>
+  <div class="qty"><button type="button" class="qb" onclick="qMinus(this)">-</button><div class="qv">1</div><button type="button" class="qb" onclick="qPlus(this)">+</button></div>
+</div>
+<div class="card" data-pct="35" data-rc="0">
+  <div class="card-top"><input type="checkbox" onchange="toggleCard(this)"><span class="card-name" onclick="tapCard(this)">ソファ</span></div>
+  <div class="card-meta">占有率 35%/個</div>
+  <div class="qty"><button type="button" class="qb" onclick="qMinus(this)">-</button><div class="qv">1</div><button type="button" class="qb" onclick="qPlus(this)">+</button></div>
+</div>
+<div class="card" data-pct="20" data-rc="0">
+  <div class="card-top"><input type="checkbox" onchange="toggleCard(this)"><span class="card-name" onclick="tapCard(this)">テーブル/机</span></div>
+  <div class="card-meta">占有率 20%/個</div>
+  <div class="qty"><button type="button" class="qb" onclick="qMinus(this)">-</button><div class="qv">1</div><button type="button" class="qb" onclick="qPlus(this)">+</button></div>
+</div>
+<div class="card" data-pct="25" data-rc="0">
+  <div class="card-top"><input type="checkbox" onchange="toggleCard(this)"><span class="card-name" onclick="tapCard(this)">食器棚</span></div>
+  <div class="card-meta">占有率 25%/個</div>
+  <div class="qty"><button type="button" class="qb" onclick="qMinus(this)">-</button><div class="qv">1</div><button type="button" class="qb" onclick="qPlus(this)">+</button></div>
+</div>
+<div class="card" data-pct="20" data-rc="0">
+  <div class="card-top"><input type="checkbox" onchange="toggleCard(this)"><span class="card-name" onclick="tapCard(this)">本棚</span></div>
+  <div class="card-meta">占有率 20%/個</div>
+  <div class="qty"><button type="button" class="qb" onclick="qMinus(this)">-</button><div class="qv">1</div><button type="button" class="qb" onclick="qPlus(this)">+</button></div>
+</div>
+</div>
+
+<div class="dvd"></div>
+<div class="cat">中型</div>
+<div class="grid">
+<div class="card" data-pct="10" data-rc="0">
+  <div class="card-top"><input type="checkbox" onchange="toggleCard(this)"><span class="card-name" onclick="tapCard(this)">衣装ケース</span></div>
+  <div class="card-meta">占有率 10%/個</div>
+  <div class="qty"><button type="button" class="qb" onclick="qMinus(this)">-</button><div class="qv">1</div><button type="button" class="qb" onclick="qPlus(this)">+</button></div>
+</div>
+<div class="card" data-pct="8" data-rc="0">
+  <div class="card-top"><input type="checkbox" onchange="toggleCard(this)"><span class="card-name" onclick="tapCard(this)">カラーボックス</span></div>
+  <div class="card-meta">占有率 8%/個</div>
+  <div class="qty"><button type="button" class="qb" onclick="qMinus(this)">-</button><div class="qv">1</div><button type="button" class="qb" onclick="qPlus(this)">+</button></div>
+</div>
+<div class="card" data-pct="8" data-rc="0">
+  <div class="card-top"><input type="checkbox" onchange="toggleCard(this)"><span class="card-name" onclick="tapCard(this)">椅子</span></div>
+  <div class="card-meta">占有率 8%/個</div>
+  <div class="qty"><button type="button" class="qb" onclick="qMinus(this)">-</button><div class="qv">1</div><button type="button" class="qb" onclick="qPlus(this)">+</button></div>
+</div>
+<div class="card" data-pct="15" data-rc="0">
+  <div class="card-top"><input type="checkbox" onchange="toggleCard(this)"><span class="card-name" onclick="tapCard(this)">布団一式</span></div>
+  <div class="card-meta">占有率 15%/個</div>
+  <div class="qty"><button type="button" class="qb" onclick="qMinus(this)">-</button><div class="qv">1</div><button type="button" class="qb" onclick="qPlus(this)">+</button></div>
+</div>
+</div>
+
+<div class="dvd"></div>
+<div class="cat">小型・雑貨</div>
+<div class="grid">
+<div class="card" data-pct="5" data-rc="0">
+  <div class="card-top"><input type="checkbox" onchange="toggleCard(this)"><span class="card-name" onclick="tapCard(this)">段ボール箱</span></div>
+  <div class="card-meta">占有率 5%/個</div>
+  <div class="qty"><button type="button" class="qb" onclick="qMinus(this)">-</button><div class="qv">1</div><button type="button" class="qb" onclick="qPlus(this)">+</button></div>
+</div>
+<div class="card" data-pct="3" data-rc="0">
+  <div class="card-top"><input type="checkbox" onchange="toggleCard(this)"><span class="card-name" onclick="tapCard(this)">ゴミ袋</span></div>
+  <div class="card-meta">占有率 3%/個</div>
+  <div class="qty"><button type="button" class="qb" onclick="qMinus(this)">-</button><div class="qv">1</div><button type="button" class="qb" onclick="qPlus(this)">+</button></div>
+</div>
+</div>
+
+<div class="dvd"></div>
+<div class="cat">家電（リサイクル料あり）</div>
+<div class="grid">
+<div class="card" data-pct="10" data-rc="990">
+  <div class="card-top"><input type="checkbox" onchange="toggleCard(this)"><span class="card-name" onclick="tapCard(this)">エアコン</span></div>
+  <div class="card-meta"><span class="rc">RC &yen;990</span> 占有率 10%</div>
+  <div class="qty"><button type="button" class="qb" onclick="qMinus(this)">-</button><div class="qv">1</div><button type="button" class="qb" onclick="qPlus(this)">+</button></div>
+</div>
+<div class="card" data-pct="10" data-rc="1870">
+  <div class="card-top"><input type="checkbox" onchange="toggleCard(this)"><span class="card-name" onclick="tapCard(this)">テレビ小</span></div>
+  <div class="card-meta"><span class="rc">RC &yen;1,870</span> 占有率 10%</div>
+  <div class="qty"><button type="button" class="qb" onclick="qMinus(this)">-</button><div class="qv">1</div><button type="button" class="qb" onclick="qPlus(this)">+</button></div>
+</div>
+<div class="card" data-pct="15" data-rc="2970">
+  <div class="card-top"><input type="checkbox" onchange="toggleCard(this)"><span class="card-name" onclick="tapCard(this)">テレビ大</span></div>
+  <div class="card-meta"><span class="rc">RC &yen;2,970</span> 占有率 15%</div>
+  <div class="qty"><button type="button" class="qb" onclick="qMinus(this)">-</button><div class="qv">1</div><button type="button" class="qb" onclick="qPlus(this)">+</button></div>
+</div>
+<div class="card" data-pct="25" data-rc="3740">
+  <div class="card-top"><input type="checkbox" onchange="toggleCard(this)"><span class="card-name" onclick="tapCard(this)">冷蔵庫小(~170L)</span></div>
+  <div class="card-meta"><span class="rc">RC &yen;3,740</span> 占有率 25%</div>
+  <div class="qty"><button type="button" class="qb" onclick="qMinus(this)">-</button><div class="qv">1</div><button type="button" class="qb" onclick="qPlus(this)">+</button></div>
+</div>
+<div class="card" data-pct="35" data-rc="4730">
+  <div class="card-top"><input type="checkbox" onchange="toggleCard(this)"><span class="card-name" onclick="tapCard(this)">冷蔵庫大(171L~)</span></div>
+  <div class="card-meta"><span class="rc">RC &yen;4,730</span> 占有率 35%</div>
+  <div class="qty"><button type="button" class="qb" onclick="qMinus(this)">-</button><div class="qv">1</div><button type="button" class="qb" onclick="qPlus(this)">+</button></div>
+</div>
+<div class="card" data-pct="20" data-rc="2530">
+  <div class="card-top"><input type="checkbox" onchange="toggleCard(this)"><span class="card-name" onclick="tapCard(this)">洗濯機</span></div>
+  <div class="card-meta"><span class="rc">RC &yen;2,530</span> 占有率 20%</div>
+  <div class="qty"><button type="button" class="qb" onclick="qMinus(this)">-</button><div class="qv">1</div><button type="button" class="qb" onclick="qPlus(this)">+</button></div>
+</div>
+</div>
+
+<div class="dvd"></div>
+<div class="cat">その他家電（リサイクル料なし）</div>
+<div class="grid">
+<div class="card" data-pct="8" data-rc="0">
+  <div class="card-top"><input type="checkbox" onchange="toggleCard(this)"><span class="card-name" onclick="tapCard(this)">電子レンジ</span></div>
+  <div class="card-meta">占有率 8%/個</div>
+  <div class="qty"><button type="button" class="qb" onclick="qMinus(this)">-</button><div class="qv">1</div><button type="button" class="qb" onclick="qPlus(this)">+</button></div>
+</div>
+<div class="card" data-pct="5" data-rc="0">
+  <div class="card-top"><input type="checkbox" onchange="toggleCard(this)"><span class="card-name" onclick="tapCard(this)">掃除機</span></div>
+  <div class="card-meta">占有率 5%/個</div>
+  <div class="qty"><button type="button" class="qb" onclick="qMinus(this)">-</button><div class="qv">1</div><button type="button" class="qb" onclick="qPlus(this)">+</button></div>
+</div>
+<div class="card" data-pct="3" data-rc="0">
+  <div class="card-top"><input type="checkbox" onchange="toggleCard(this)"><span class="card-name" onclick="tapCard(this)">炊飯器</span></div>
+  <div class="card-meta">占有率 3%/個</div>
+  <div class="qty"><button type="button" class="qb" onclick="qMinus(this)">-</button><div class="qv">1</div><button type="button" class="qb" onclick="qPlus(this)">+</button></div>
+</div>
+<div class="card" data-pct="5" data-rc="0">
+  <div class="card-top"><input type="checkbox" onchange="toggleCard(this)"><span class="card-name" onclick="tapCard(this)">プリンター</span></div>
+  <div class="card-meta">占有率 5%/個</div>
+  <div class="qty"><button type="button" class="qb" onclick="qMinus(this)">-</button><div class="qv">1</div><button type="button" class="qb" onclick="qPlus(this)">+</button></div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="sec">
+<div class="sec-h">5. 軽トラ積載</div>
+<div class="sec-b">
+<div style="font-size:13px;color:#9999bb">自動計算</div>
+<div><span class="tv" id="t-auto">0</span><span style="font-size:13px;color:#9999bb"> 回分</span><span style="font-size:13px;color:#9999bb" id="t-pct">（0%）</span></div>
+<div class="truck-bar-wrap"><div class="truck-bar" id="t-bar" style="width:0%"></div></div>
+<div class="tm">
+<label>手動（回）:</label>
+<input type="number" id="t-manual" min="1" max="99" placeholder="自動" onchange="setManual()" oninput="setManual()">
+<button type="button" class="rbtn" onclick="resetManual()">リセット</button>
+</div>
+</div>
+</div>
+
+<div class="sec">
+<div class="sec-h">利益率（掛率）</div>
+<div class="sec-b">
+<div class="sr">
+<input type="range" id="margin" min="100" max="200" step="5" value="130" oninput="setMargin(this.value)" onchange="setMargin(this.value)">
+<div class="sv" id="margin-v">1.3x</div>
+</div>
+<div class="sl"><span>1.0（原価）</span><span>1.5</span><span>2.0</span></div>
+</div>
+</div>
+
+<div id="footer">
+<div class="ft">軽トラ: <strong id="r-tr">0回</strong> | 積載率: <strong id="r-pc">0%</strong></div>
+<div class="dvd" style="margin:6px 0"></div>
+<div class="fm">
+<div><div class="fp-l">見積もり金額（税込）</div><div class="fp" id="r-price">&yen;0</div></div>
+<div class="fpr"><div class="fpr-l">利益</div><div class="fpr-v" id="r-profit">&yen;0</div></div>
+</div>
+<div class="fd">
+<span>原価: <strong id="r-cost">&yen;0</strong></span>
+<span>人件費: <strong id="r-lab">&yen;0</strong></span>
+<span>ガソリン: <strong id="r-gas">&yen;0</strong></span>
+<span>リサイクル: <strong id="r-rc">&yen;0</strong></span>
+</div>
+</div>
+
+<script>
+var S={area:650,workers:1,hours:4,truckM:null,margin:1.3};
+
+function getCard(el){while(el&&!el.getAttribute('data-pct'))el=el.parentElement;return el;}
+
+function calc(){
+  var cards=document.querySelectorAll('.card');
+  var tp=0,tr=0;
+  for(var i=0;i<cards.length;i++){
+    var c=cards[i];
+    var cb=c.querySelector('input[type=checkbox]');
+    if(cb&&cb.checked){
+      var q=parseInt(c.querySelector('.qv').textContent)||1;
+      tp+=(parseInt(c.getAttribute('data-pct'))||0)*q;
+      tr+=(parseInt(c.getAttribute('data-rc'))||0)*q;
+    }
+  }
+  var at=tp===0?0:Math.ceil(tp/100);
+  var trips=S.truckM!==null?S.truckM:at;
+  if(trips<1&&tp>0)trips=1;
+  var b=document.getElementById('t-bar');
+  b.style.width=Math.min(tp/2,100)+'%';
+  b.className='truck-bar'+(tp>100?' over':'');
+  if(S.truckM!==null){
+    document.getElementById('t-auto').textContent=S.truckM;
+    document.getElementById('t-pct').textContent='（手動 / 自動'+at+'回 / '+tp+'%）';
+  }else{
+    document.getElementById('t-auto').textContent=at;
+    document.getElementById('t-pct').textContent='（'+tp+'%）';
+  }
+  var labor=2000*S.hours*S.workers;
+  var gas=S.area*Math.max(trips,1);
+  var cost=labor+gas+tr;
+  var price=Math.round(cost*S.margin);
+  var profit=price-cost;
+  var pr=cost>0?Math.round(profit/price*100):0;
+  document.getElementById('r-tr').textContent=trips+'回';
+  document.getElementById('r-pc').textContent=tp+'%';
+  document.getElementById('r-price').textContent='\u00a5'+price.toLocaleString();
+  document.getElementById('r-profit').textContent='\u00a5'+profit.toLocaleString()+'（'+pr+'%）';
+  document.getElementById('r-cost').textContent='\u00a5'+cost.toLocaleString();
+  document.getElementById('r-lab').textContent='\u00a5'+labor.toLocaleString();
+  document.getElementById('r-gas').textContent='\u00a5'+gas.toLocaleString();
+  document.getElementById('r-rc').textContent='\u00a5'+tr.toLocaleString();
+}
+
+function setArea(el,v){S.area=v;var ls=el.parentElement.querySelectorAll('.rl');for(var i=0;i<ls.length;i++)ls[i].className='rl';el.className='rl on';calc();}
+function setWorkers(el,v){S.workers=v;var ls=el.parentElement.querySelectorAll('.rl');for(var i=0;i<ls.length;i++)ls[i].className='rl';el.className='rl on';calc();}
+
+function toggleCard(cb){var c=getCard(cb);if(c){c.className=cb.checked?'card on':'card';}calc();}
+function tapCard(el){var c=getCard(el);if(!c)return;var cb=c.querySelector('input[type=checkbox]');cb.checked=!cb.checked;c.className=cb.checked?'card on':'card';calc();}
+
+function qPlus(el){var c=getCard(el);if(!c)return;var qv=c.querySelector('.qv');var v=parseInt(qv.textContent)||1;if(v<99){qv.textContent=v+1;}calc();}
+function qMinus(el){var c=getCard(el);if(!c)return;var qv=c.querySelector('.qv');var v=parseInt(qv.textContent)||1;if(v>1){qv.textContent=v-1;}calc();}
+
+function setManual(){var v=parseInt(document.getElementById('t-manual').value);S.truckM=(isNaN(v)||v<1)?null:v;calc();}
+function resetManual(){S.truckM=null;document.getElementById('t-manual').value='';calc();}
+function setMargin(v){S.margin=parseInt(v)/100;document.getElementById('margin-v').textContent=S.margin.toFixed(1)+'x';calc();}
+
+calc();
+</script>
+</body>
+</html>
