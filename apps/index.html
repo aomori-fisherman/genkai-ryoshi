@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>限界漁師 AIボディメイクツール</title>
+<meta name="description" content="写真を撮るだけ。AIが食事と姿勢を管理する。登録不要・無料で今すぐ試せるボディメイクAIツール。"/>
+<meta name="keywords" content="AI食事分析,姿勢分析,ボディメイク,PFC,カロリー計算,減量,限界漁師"/>
+<meta property="og:title" content="限界漁師 AIボディメイクツール"/>
+<meta property="og:description" content="写真を撮るだけ。AIが食事と姿勢を管理する。登録不要・無料で今すぐ試せるボディメイクAIツール。"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://aomori-fisherman.github.io/genkai-ryoshi/apps/"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho:wght@400;600;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --ink: #0a0f1a;
+  --sea-deep: #0b2942;
+  --sea-mid: #144d6f;
+  --sea-light: #1a7a9e;
+  --sea-bright: #22b8cf;
+  --sea-pale: #e0f7fa;
+  --ember: #e85d26;
+  --ember-light: #ff7e47;
+  --sand: #f5e6c8;
+  --sand-light: #faf4e8;
+  --bone: #fefcf7;
+  --text: #1a1a2e;
+  --text-mid: #4a4a5a;
+  --text-light: #7a7a8a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  color: var(--text);
+  background: var(--bone);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+.font-mincho { font-family: 'Shippori Mincho', serif; }
+
+/* ── Utility ── */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+/* ── Nav ── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px;
+}
+.nav-brand {
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 800; font-size: 1.1rem; color: var(--text);
+  text-decoration: none; letter-spacing: .04em;
+}
+.nav-brand span { color: var(--sea-bright); }
+.nav-back {
+  color: var(--text-mid); text-decoration: none;
+  font-size: .82rem; font-weight: 500;
+  transition: color .2s;
+  display: flex; align-items: center; gap: 6px;
+}
+.nav-back:hover { color: var(--sea-bright); }
+.nav-back::before { content: '\2190'; font-size: 1rem; }
+
+/* ── Hero ── */
+.hero {
+  position: relative;
+  background: linear-gradient(160deg, #f0fdfa 0%, #e0f7fa 40%, #f0f9ff 100%);
+  padding: 88px 0 72px;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -40%; right: -15%; width: 70%; height: 180%;
+  background: radial-gradient(ellipse, rgba(34,184,207,.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 100px;
+  background: linear-gradient(to top, var(--bone), transparent);
+  pointer-events: none;
+}
+.hero-inner {
+  position: relative; z-index: 2;
+  max-width: 720px;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(34,184,207,.1);
+  border: 1px solid rgba(34,184,207,.3);
+  border-radius: 100px; padding: 6px 16px;
+  font-size: .75rem; color: var(--sea-mid); font-weight: 700;
+  margin-bottom: 24px; letter-spacing: .06em;
+}
+.hero-badge-dot {
+  width: 6px; height: 6px; background: var(--sea-bright);
+  border-radius: 50%; animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+.hero h1 {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(1.9rem, 4.5vw, 3.2rem);
+  font-weight: 800; color: var(--text);
+  line-height: 1.35; margin-bottom: 20px;
+  letter-spacing: .02em;
+}
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(90deg, var(--sea-light), var(--sea-bright));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  color: var(--text-mid); font-size: 1rem;
+  line-height: 1.85; margin-bottom: 36px;
+  max-width: 540px;
+}
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--ember); color: #fff;
+  padding: 14px 32px; border-radius: 8px;
+  font-size: .95rem; font-weight: 700;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: transform .15s, box-shadow .2s, background .2s;
+  box-shadow: 0 4px 20px rgba(232,93,38,.3);
+}
+.btn-primary:hover { background: var(--ember-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(232,93,38,.4); }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--text-mid);
+  padding: 14px 28px; border-radius: 8px;
+  font-size: .9rem; font-weight: 500;
+  text-decoration: none;
+  border: 1px solid rgba(0,0,0,.15);
+  transition: all .2s; cursor: pointer;
+}
+.btn-ghost:hover { border-color: var(--sea-bright); color: var(--sea-light); background: rgba(34,184,207,.04); }
+
+/* ── App Cards ── */
+.apps-section { padding: 80px 0; }
+.section-label {
+  display: inline-block;
+  font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--sea-light); margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(1.5rem, 2.8vw, 2.2rem); font-weight: 800;
+  line-height: 1.35; margin-bottom: 12px;
+}
+.section-desc { color: var(--text-mid); font-size: .97rem; line-height: 1.8; margin-bottom: 48px; }
+
+.app-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px;
+}
+.app-card {
+  background: #fff; border-radius: 16px; padding: 40px 36px;
+  border: 1px solid rgba(0,0,0,.06);
+  transition: transform .2s, box-shadow .2s;
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.app-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,.08); }
+.app-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+}
+.app-card-sage::before { background: linear-gradient(90deg, var(--sea-bright), #6be4f5); }
+.app-card-cactus::before { background: linear-gradient(90deg, #4ade80, #86efac); }
+
+.app-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; margin-bottom: 22px;
+}
+.app-icon-sage { background: var(--sea-pale); }
+.app-icon-cactus { background: #f0fdf4; }
+
+.app-name {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.4rem; font-weight: 800; margin-bottom: 4px;
+}
+.app-name-sage { color: var(--sea-deep); }
+.app-name-cactus { color: #166534; }
+
+.app-tagline {
+  font-size: .85rem; font-weight: 700; margin-bottom: 20px;
+  color: var(--text-mid);
+}
+
+.app-features {
+  list-style: none; margin-bottom: 28px; flex: 1;
+}
+.app-features li {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0,0,0,.05);
+  font-size: .9rem; color: var(--text-mid);
+  display: flex; align-items: flex-start; gap: 10px;
+  line-height: 1.55;
+}
+.app-features li:last-child { border-bottom: none; }
+.app-features li::before {
+  content: '';
+  display: block; min-width: 16px; height: 16px;
+  margin-top: 2px; border-radius: 50%;
+  background-position: center; background-repeat: no-repeat;
+}
+.app-card-sage .app-features li::before {
+  background-color: var(--sea-pale);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.5 8L6.5 11L12.5 5' stroke='%2322b8cf' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.app-card-cactus .app-features li::before {
+  background-color: #f0fdf4;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.5 8L6.5 11L12.5 5' stroke='%234ade80' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.btn-app {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 13px 28px; border-radius: 8px;
+  font-size: .9rem; font-weight: 700;
+  text-decoration: none; transition: transform .15s, box-shadow .2s;
+  border: none; cursor: pointer;
+}
+.btn-app-sage {
+  background: var(--sea-bright); color: #fff;
+  box-shadow: 0 4px 18px rgba(34,184,207,.3);
+}
+.btn-app-sage:hover { background: #1aa8bd; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(34,184,207,.4); }
+.btn-app-cactus {
+  background: #22c55e; color: #fff;
+  box-shadow: 0 4px 18px rgba(34,197,94,.3);
+}
+.btn-app-cactus:hover { background: #16a34a; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(34,197,94,.4); }
+
+.btn-app::after { content: '\2192'; font-size: 1rem; }
+
+/* ── Steps section ── */
+.steps-section {
+  padding: 72px 0;
+  background: var(--sand-light);
+}
+.steps-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+  margin-top: 48px;
+}
+.step-card {
+  text-align: center; padding: 32px 24px;
+  background: #fff; border-radius: 14px;
+  border: 1px solid rgba(0,0,0,.05);
+  position: relative;
+}
+.step-number {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 2.8rem; font-weight: 800;
+  color: var(--sea-pale);
+  line-height: 1; margin-bottom: 16px;
+  -webkit-text-stroke: 2px var(--sea-bright);
+  text-stroke: 2px var(--sea-bright);
+}
+.step-title {
+  font-size: 1rem; font-weight: 700; margin-bottom: 10px; color: var(--text);
+}
+.step-desc { font-size: .88rem; color: var(--text-mid); line-height: 1.7; }
+
+.step-arrow {
+  position: absolute; top: 50%; right: -20px;
+  width: 40px; height: 2px;
+  background: var(--sea-bright); opacity: .4;
+  transform: translateY(-50%);
+}
+.step-arrow::after {
+  content: '';
+  position: absolute; right: -1px; top: -4px;
+  width: 0; height: 0;
+  border-left: 8px solid var(--sea-bright);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  opacity: .4;
+}
+.step-card:last-child .step-arrow { display: none; }
+
+/* ── Pricing section ── */
+.pricing-section { padding: 80px 0; }
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+  max-width: 760px; margin: 48px auto 0;
+}
+.pricing-card {
+  border-radius: 16px; padding: 40px 36px;
+  border: 1px solid rgba(0,0,0,.07);
+  position: relative;
+}
+.pricing-card-free { background: #fff; }
+.pricing-card-pro {
+  background: linear-gradient(160deg, #f0fdfa, #e8fffe);
+  border-color: rgba(34,184,207,.25);
+}
+
+.pricing-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 12px; border-radius: 100px;
+  font-size: .72rem; font-weight: 700; letter-spacing: .06em;
+  margin-bottom: 20px;
+}
+.badge-free {
+  background: var(--sea-pale); color: var(--sea-mid);
+}
+.badge-pro {
+  background: rgba(34,184,207,.15); color: var(--sea-bright);
+  border: 1px solid rgba(34,184,207,.3);
+}
+.badge-coming {
+  display: inline-flex; align-items: center;
+  padding: 3px 10px; border-radius: 4px;
+  font-size: .68rem; font-weight: 700; letter-spacing: .06em;
+  background: rgba(232,93,38,.15); color: var(--ember-light);
+  border: 1px solid rgba(232,93,38,.2);
+  margin-left: 8px; vertical-align: middle;
+}
+
+.pricing-plan-name {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.5rem; font-weight: 800; margin-bottom: 8px;
+}
+.pricing-card-free .pricing-plan-name { color: var(--text); }
+.pricing-card-pro .pricing-plan-name { color: var(--sea-deep); }
+
+.pricing-price {
+  font-size: 1.9rem; font-weight: 900; line-height: 1;
+  margin-bottom: 6px;
+}
+.pricing-card-free .pricing-price { color: var(--sea-deep); }
+.pricing-card-pro .pricing-price { color: var(--sea-light); }
+
+.pricing-note {
+  font-size: .8rem; margin-bottom: 28px;
+}
+.pricing-card-free .pricing-note { color: var(--text-light); }
+.pricing-card-pro .pricing-note { color: var(--text-mid); }
+
+.pricing-divider {
+  height: 1px; margin-bottom: 24px;
+}
+.pricing-card-free .pricing-divider { background: rgba(0,0,0,.06); }
+.pricing-card-pro .pricing-divider { background: rgba(0,0,0,.08); }
+
+.pricing-list {
+  list-style: none; margin-bottom: 32px;
+}
+.pricing-list li {
+  padding: 9px 0;
+  font-size: .9rem;
+  display: flex; align-items: flex-start; gap: 10px;
+  line-height: 1.5;
+  border-bottom: 1px solid transparent;
+}
+.pricing-card-free .pricing-list li { color: var(--text-mid); }
+.pricing-card-pro .pricing-list li { color: var(--text-mid); }
+
+.pricing-list li::before {
+  content: '';
+  display: block; min-width: 16px; height: 16px;
+  margin-top: 1px; border-radius: 50%;
+  background-position: center; background-repeat: no-repeat;
+}
+.pricing-card-free .pricing-list li::before {
+  background-color: var(--sea-pale);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.5 8L6.5 11L12.5 5' stroke='%2322b8cf' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.pricing-card-pro .pricing-list li::before {
+  background-color: rgba(34,184,207,.12);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.5 8L6.5 11L12.5 5' stroke='%231a7a9e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.btn-pricing-free {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; padding: 13px 24px; border-radius: 8px;
+  font-size: .9rem; font-weight: 700;
+  text-decoration: none; transition: transform .15s, box-shadow .2s;
+  background: var(--ember); color: #fff;
+  box-shadow: 0 4px 18px rgba(232,93,38,.25);
+}
+.btn-pricing-free:hover { background: var(--ember-light); transform: translateY(-2px); }
+.btn-pricing-free::after { content: '\2192'; }
+
+.btn-pricing-pro {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; padding: 13px 24px; border-radius: 8px;
+  font-size: .9rem; font-weight: 700;
+  background: rgba(34,184,207,.08);
+  color: var(--sea-light);
+  border: 1px solid rgba(34,184,207,.2);
+  cursor: default;
+}
+
+/* ── Footer ── */
+.footer {
+  background: #f8fafb;
+  padding: 48px 0 32px;
+  border-top: 1px solid rgba(0,0,0,.06);
+}
+.footer-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 24px;
+}
+.footer-brand {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.15rem; font-weight: 800; color: var(--text);
+  text-decoration: none; letter-spacing: .04em;
+}
+.footer-brand span { color: var(--sea-bright); }
+.footer-links {
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.footer-links a {
+  color: var(--text-light); text-decoration: none;
+  font-size: .82rem; font-weight: 500;
+  transition: color .2s;
+}
+.footer-links a:hover { color: var(--sea-bright); }
+.footer-copy {
+  width: 100%; text-align: center;
+  color: var(--text-light); font-size: .75rem;
+  margin-top: 24px; padding-top: 24px;
+  border-top: 1px solid rgba(0,0,0,.05);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .hero { padding: 64px 0 56px; }
+  .hero h1 { font-size: clamp(1.7rem, 6vw, 2.4rem); }
+  .hero-sub { font-size: .93rem; }
+
+  .app-grid { grid-template-columns: 1fr; }
+  .app-card { padding: 32px 28px; }
+
+  .steps-grid { grid-template-columns: 1fr; gap: 20px; }
+  .step-arrow { display: none; }
+
+  .pricing-grid { grid-template-columns: 1fr; max-width: 100%; }
+  .pricing-card { padding: 32px 28px; }
+
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .footer-links { gap: 16px; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 18px; }
+  .app-card { padding: 28px 20px; }
+  .btn-primary, .btn-ghost { padding: 12px 22px; font-size: .88rem; }
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav" role="navigation" aria-label="メインナビゲーション">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-brand">限界<span>漁師</span></a>
+    <a href="../index.html" class="nav-back">HPトップへ戻る</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        AI BODYMAKE TOOLS — 無料公開中
+      </div>
+      <h1>写真を撮るだけ。<br>AIが<em>食事と姿勢</em>を<br>管理する。</h1>
+      <p class="hero-sub">登録不要・無料で今すぐ試せるボディメイクAIツール。<br>食事管理が続かなかった人へ。計算より行動を先に。</p>
+      <div class="hero-actions">
+        <a href="https://genkairyoshi-sage.hf.space" target="_blank" rel="noopener" class="btn-primary">無料で試す</a>
+        <a href="#apps" class="btn-ghost">ツールを見る</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- App Cards -->
+<section class="apps-section" id="apps">
+  <div class="container">
+    <span class="section-label">TOOLS</span>
+    <h2 class="section-title font-mincho">2つのAIツール</h2>
+    <p class="section-desc">食事と姿勢。ボディメイクで変えるべきものはこの2つだけ。どちらもスマホ1台で完結する。</p>
+    <div class="app-grid">
+
+      <!-- Sage -->
+      <div class="app-card app-card-sage">
+        <div class="app-icon app-icon-sage">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="14" cy="10" r="6" stroke="#22b8cf" stroke-width="2"/>
+            <path d="M6 22c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="#22b8cf" stroke-width="2" stroke-linecap="round"/>
+            <path d="M19 6l2-2M22 9h2M20 12l2 2" stroke="#22b8cf" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="app-name app-name-sage">Sage</div>
+        <div class="app-tagline">AI食事分析 — 撮って確認するだけ</div>
+        <ul class="app-features">
+          <li>食事の写真を撮るだけでPFC・カロリーを自動計算</li>
+          <li>食材のg数をその場で修正可能</li>
+          <li>食事管理アプリが続かなかった人へ</li>
+        </ul>
+        <a href="https://genkairyoshi-sage.hf.space" target="_blank" rel="noopener" class="btn-app btn-app-sage">Sageを試す</a>
+      </div>
+
+      <!-- Cactus -->
+      <div class="app-card app-card-cactus">
+        <div class="app-icon app-icon-cactus">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="12" y="3" width="4" height="18" rx="2" stroke="#22c55e" stroke-width="2"/>
+            <path d="M14 21V25" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9 25H19" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/>
+            <path d="M12 10H8a2 2 0 01-2-2V6" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/>
+            <path d="M16 14h4a2 2 0 002-2v-2" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="app-name app-name-cactus">Cactus</div>
+        <div class="app-tagline">AI姿勢分析 — 全身を撮るだけ</div>
+        <ul class="app-features">
+          <li>スマホで全身を撮るだけで姿勢の歪みを検出</li>
+          <li>巻き肩・反り腰・ストレートネックを可視化</li>
+          <li>改善エクササイズを自動提案</li>
+        </ul>
+        <a href="https://genkairyoshi-cactus.hf.space" target="_blank" rel="noopener" class="btn-app btn-app-cactus">Cactusを試す</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Steps -->
+<section class="steps-section" id="howto">
+  <div class="container">
+    <span class="section-label">HOW TO USE</span>
+    <h2 class="section-title font-mincho">使い方は3ステップ</h2>
+    <p class="section-desc">アカウント登録も不要。スマホがあれば今すぐ始められる。</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">01</div>
+        <div class="step-title">料理を撮影する</div>
+        <p class="step-desc">スマホで食事の写真を撮るだけ。皿ごとでも、バラバラでも構わない。</p>
+        <div class="step-arrow"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">02</div>
+        <div class="step-title">AIが自動分析</div>
+        <p class="step-desc">食材・PFC・カロリーをAIが自動で読み取る。手入力ゼロ。</p>
+        <div class="step-arrow"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">03</div>
+        <div class="step-title">g数を調整して確定</div>
+        <p class="step-desc">量が違えばその場で修正。それだけで食事管理は完結する。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <span class="section-label">PRICING</span>
+    <h2 class="section-title font-mincho">シンプルな料金体系</h2>
+    <p class="section-desc">まず無料で使ってみる。継続したくなったらProへ。</p>
+    <div class="pricing-grid">
+
+      <!-- Free -->
+      <div class="pricing-card pricing-card-free">
+        <div class="pricing-badge badge-free">FREE</div>
+        <div class="pricing-plan-name font-mincho">無料プラン</div>
+        <div class="pricing-price">¥0</div>
+        <div class="pricing-note">登録不要 · 今すぐ使える</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-list">
+          <li>写真分析（回数無制限）</li>
+          <li>食材のg数編集</li>
+          <li>姿勢チェック</li>
+          <li>履歴保存なし</li>
+        </ul>
+        <a href="https://genkairyoshi-sage.hf.space" target="_blank" rel="noopener" class="btn-pricing-free">今すぐ無料で試す</a>
+      </div>
+
+      <!-- Pro -->
+      <div class="pricing-card pricing-card-pro">
+        <div class="pricing-badge badge-pro">PRO <span class="badge-coming">Coming Soon</span></div>
+        <div class="pricing-plan-name font-mincho">Proプラン</div>
+        <div class="pricing-price">¥500<span style="font-size:1rem;font-weight:500;color:rgba(255,255,255,.4)">/月</span></div>
+        <div class="pricing-note">年額 ¥3,900（¥325/月）</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-list">
+          <li>無料プランの全機能</li>
+          <li>全履歴の保存</li>
+          <li>週次PFCレポート自動生成</li>
+          <li>体重連動・減量ペース判定</li>
+          <li>姿勢改善の経過記録</li>
+        </ul>
+        <div class="btn-pricing-pro">準備中 — しばらくお待ちください</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <a href="../index.html" class="footer-brand">限界<span>漁師</span></a>
+      <div class="footer-links">
+        <a href="../index.html">HPトップ</a>
+        <a href="https://www.instagram.com/genkai_ryoshi/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+    <div class="footer-copy">
+      &copy; 2026 限界漁師
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
