@@ -296,6 +296,10 @@ body {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
   max-width: 760px; margin: 48px auto 0;
 }
+.pricing-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 980px;
+}
 .pricing-card {
   border-radius: 16px; padding: 40px 36px;
   border: 1px solid rgba(0,0,0,.07);
@@ -305,6 +309,33 @@ body {
 .pricing-card-pro {
   background: linear-gradient(160deg, #f0fdfa, #e8fffe);
   border-color: rgba(34,184,207,.25);
+}
+.pricing-card-proplus {
+  background: linear-gradient(160deg, #fef3f0, #fff8f5);
+  border: 1px solid rgba(232,93,38,.2);
+  border-radius: 16px; padding: 40px 36px;
+  position: relative;
+}
+.pricing-card-proplus .pricing-plan-name { color: var(--ember); }
+.pricing-card-proplus .pricing-price { color: var(--ember); }
+.pricing-card-proplus .pricing-note { color: var(--text-mid); }
+.pricing-card-proplus .pricing-divider { height: 1px; background: rgba(232,93,38,.1); margin-bottom: 24px; }
+.pricing-card-proplus .pricing-list { list-style: none; margin-bottom: 32px; }
+.pricing-card-proplus .pricing-list li {
+  padding: 9px 0; font-size: .9rem; color: var(--text-mid);
+  display: flex; align-items: flex-start; gap: 10px; line-height: 1.5;
+}
+.pricing-card-proplus .pricing-list li::before {
+  content: ''; display: block; min-width: 16px; height: 16px;
+  margin-top: 1px; border-radius: 50%;
+  background-color: rgba(232,93,38,.1);
+  background-position: center; background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.5 8L6.5 11L12.5 5' stroke='%23e85d26' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.pricing-card-proplus .btn-pricing-pro {
+  background: rgba(232,93,38,.08);
+  color: var(--ember);
+  border-color: rgba(232,93,38,.2);
 }
 
 .pricing-badge {
@@ -448,7 +479,7 @@ body {
   .steps-grid { grid-template-columns: 1fr; gap: 20px; }
   .step-arrow { display: none; }
 
-  .pricing-grid { grid-template-columns: 1fr; max-width: 100%; }
+  .pricing-grid, .pricing-grid-3 { grid-template-columns: 1fr; max-width: 100%; }
   .pricing-card { padding: 32px 28px; }
 
   .footer-inner { flex-direction: column; align-items: flex-start; }
@@ -576,7 +607,7 @@ body {
     <span class="section-label">PRICING</span>
     <h2 class="section-title font-mincho">シンプルな料金体系</h2>
     <p class="section-desc">まず無料で使ってみる。継続したくなったらProへ。</p>
-    <div class="pricing-grid">
+    <div class="pricing-grid pricing-grid-3">
 
       <!-- Free -->
       <div class="pricing-card pricing-card-free">
@@ -597,18 +628,35 @@ body {
       <!-- Pro -->
       <div class="pricing-card pricing-card-pro">
         <div class="pricing-badge badge-pro">PRO <span class="badge-coming">Coming Soon</span></div>
-        <div class="pricing-plan-name font-mincho">Proプラン</div>
-        <div class="pricing-price">¥500<span style="font-size:1rem;font-weight:500;color:rgba(255,255,255,.4)">/月</span></div>
+        <div class="pricing-plan-name font-mincho">Pro</div>
+        <div class="pricing-price">¥500<span style="font-size:1rem;font-weight:500;color:var(--text-light)">/月</span></div>
         <div class="pricing-note">年額 ¥3,900（¥325/月）</div>
         <div class="pricing-divider"></div>
         <ul class="pricing-list">
-          <li>無料プランの全機能</li>
+          <li>Sage + Cactus</li>
           <li>全履歴の保存</li>
           <li>週次PFCレポート自動生成</li>
           <li>体重連動・減量ペース判定</li>
           <li>姿勢改善の経過記録</li>
         </ul>
-        <div class="btn-pricing-pro">準備中 — しばらくお待ちください</div>
+        <div class="btn-pricing-pro">準備中</div>
+      </div>
+
+      <!-- Pro+ -->
+      <div class="pricing-card pricing-card-proplus">
+        <div class="pricing-badge badge-pro">PRO+ <span class="badge-coming">Coming Soon</span></div>
+        <div class="pricing-plan-name font-mincho">Pro+</div>
+        <div class="pricing-price">¥880<span style="font-size:1rem;font-weight:500;color:var(--text-light)">/月</span></div>
+        <div class="pricing-note">年額 ¥7,800（¥650/月）</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-list">
+          <li>Proの全機能</li>
+          <li>Bloom（ポージング分析）</li>
+          <li>ポージング比較・経過記録</li>
+          <li>大会カウントダウン</li>
+          <li>競技者向け</li>
+        </ul>
+        <div class="btn-pricing-pro">準備中</div>
       </div>
 
     </div>
