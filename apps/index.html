@@ -435,6 +435,12 @@ body {
   cursor: default;
 }
 
+/* ── Waitlist section ── */
+.waitlist-section {
+  padding: 64px 0;
+  background: var(--sand-light);
+}
+
 /* ── Footer ── */
 .footer {
   background: #f8fafb;
@@ -660,6 +666,19 @@ body {
       </div>
 
     </div>
+  </div>
+</section>
+
+<!-- Waitlist -->
+<section class="waitlist-section" id="waitlist">
+  <div class="container" style="text-align:center; max-width:560px;">
+    <h2 class="section-title font-mincho">公開時に通知を受け取る</h2>
+    <p class="section-desc">Standard / Stage プランの公開時にメールでお知らせします。</p>
+    <form action="MAILERLITE_FORM_URL" method="POST" style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:24px;">
+      <input type="email" name="fields[email]" placeholder="メールアドレス" required style="flex:1; min-width:220px; padding:14px 18px; border-radius:8px; border:1px solid rgba(0,0,0,.12); font-size:.95rem; outline:none;">
+      <button type="submit" class="btn-primary" style="white-space:nowrap;">登録する</button>
+    </form>
+    <p style="font-size:.75rem; color:var(--text-light); margin-top:12px;">スパムは送りません。公開通知のみ。</p>
   </div>
 </section>
 
