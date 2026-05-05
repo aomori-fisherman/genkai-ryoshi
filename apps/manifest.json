@@ -1,0 +1,20 @@
+{
+  "name": "Sage — AI食事PFC分析",
+  "short_name": "Sage",
+  "start_url": "https://genkairyoshi-sage.hf.space",
+  "display": "standalone",
+  "background_color": "#0e1117",
+  "theme_color": "#0e1117",
+  "icons": [
+    {
+      "src": "../sage-icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "../sage-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
