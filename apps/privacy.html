@@ -275,13 +275,40 @@ body {
   position: relative;
 }
 .section-divider::after {
-  content: 'Privacy Policy';
+  content: attr(data-label);
   position: absolute; left: 50%; top: 50%;
   transform: translate(-50%, -50%);
   background: var(--bone);
   padding: 0 16px;
   font-size: .72rem; font-weight: 700; letter-spacing: .1em;
   color: var(--text-light); text-transform: uppercase;
+}
+
+/* ── Tokusho table ── */
+.tokusho-table {
+  width: 100%; border-collapse: collapse;
+  margin-top: 12px; font-size: .88rem;
+}
+.tokusho-table th {
+  text-align: left; padding: 11px 16px;
+  background: var(--sage-green-pale);
+  color: var(--sage-green-dark); font-weight: 700;
+  border-bottom: 2px solid rgba(46,204,113,.2);
+  width: 36%; vertical-align: top;
+  white-space: nowrap;
+}
+.tokusho-table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid rgba(0,0,0,.05);
+  color: var(--text-mid);
+  line-height: 1.7;
+}
+.tokusho-table tr:last-child th,
+.tokusho-table tr:last-child td { border-bottom: none; }
+.tokusho-table tr:nth-child(even) td { background: rgba(46,204,113,.03); }
+@media (max-width: 480px) {
+  .tokusho-table { display: block; overflow-x: auto; }
+  .tokusho-table th { white-space: normal; }
 }
 
 /* ── Footer ── */
@@ -390,6 +417,8 @@ body {
         <li><a href="#pp-minor">プライバシーポリシー 9. 未成年者の利用</a></li>
         <li><a href="#pp-update">プライバシーポリシー 10. 規約・ポリシーの変更</a></li>
         <li><a href="#pp-contact">プライバシーポリシー 11. お問い合わせ</a></li>
+        <div class="toc-divider"></div>
+        <li><a href="#tokusho">特定商取引法に基づく表記</a></li>
       </ul>
     </nav>
 
@@ -439,38 +468,7 @@ body {
       <!-- 4 -->
       <div class="article-item" id="tos-pricing">
         <div class="article-title">4. 料金・プラン</div>
-        <div class="article-body">本サービスは以下のプランを提供しています。</div>
-        <table class="plan-table">
-          <thead>
-            <tr>
-              <th>プラン</th>
-              <th>料金</th>
-              <th>主な機能</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Free（無料）</td>
-              <td>¥0</td>
-              <td>AI食事分析機能のみ</td>
-            </tr>
-            <tr>
-              <td>Basic</td>
-              <td>¥500/月</td>
-              <td>プロフィール設定、食事履歴保存、レポート</td>
-            </tr>
-            <tr>
-              <td>Gym</td>
-              <td>¥660/月</td>
-              <td>トレーニング記録、有酸素記録</td>
-            </tr>
-            <tr>
-              <td>Pro</td>
-              <td>¥880/月</td>
-              <td>大会Prepモード、AI分析強化</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="article-body">本サービスには無料プランと有料プランがあります。各プランの機能と料金は、アプリ内の設定画面をご確認ください。</div>
       </div>
 
       <!-- 5 -->
@@ -499,7 +497,7 @@ body {
         <div class="article-title">7. サービスの変更・終了</div>
         <ul class="article-list">
           <li>運営者は予告なくサービス内容を変更・停止・終了する場合があります。</li>
-          <li>有料プランを契約中にサービスを終了する場合は、可能な限り事前に通知します。</li>
+          <li>有料プランを契約中にサービスを終了する場合は、原則7日前までに通知します。</li>
         </ul>
       </div>
 
@@ -512,7 +510,7 @@ body {
       </div>
     </section>
 
-    <div class="section-divider"></div>
+    <div class="section-divider" data-label="Privacy Policy"></div>
 
     <!-- ===== プライバシーポリシー ===== -->
     <section class="policy-section">
@@ -535,7 +533,7 @@ body {
           <li>食事の記録データ（食品名、推定カロリー・PFC、日時）</li>
           <li>トレーニング記録（Gym/Proプラン）</li>
           <li>プロフィール情報（身長・体重・目標等。任意入力）</li>
-          <li>食事写真（分析処理のみ。サーバーには保存しません）</li>
+          <li>食事写真（Google Gemini APIに送信し栄養素の推定処理に使用します）</li>
         </ul>
       </div>
 
@@ -552,7 +550,7 @@ body {
       <div class="article-item" id="pp-photo">
         <div class="article-title">3. 食事写真の取り扱い</div>
         <div class="article-body">
-          アップロードされた食事写真はGoogle Gemini APIに送信し、栄養素の推定処理に使用します。処理完了後、写真データはサーバーに保存されません。Googleのデータ取り扱いについてはGoogleのプライバシーポリシーをご確認ください。
+          アップロードされた食事写真はGoogle Gemini APIに送信し、栄養素の推定処理に使用します。Googleのデータ取り扱いについてはGoogleのプライバシーポリシーをご確認ください。
         </div>
       </div>
 
@@ -592,8 +590,7 @@ body {
       <div class="article-item" id="pp-delete">
         <div class="article-title">7. データの削除</div>
         <ul class="article-list">
-          <li>アカウント設定画面から、食事記録・トレーニング記録・プロフィール情報を削除できます。</li>
-          <li>アカウント自体を削除したい場合は、サービス内の削除機能またはお問い合わせ窓口よりご連絡ください。削除後は復元できません。</li>
+          <li>アカウントおよびデータの削除をご希望の場合は、お問い合わせ窓口よりご連絡ください。削除後は復元できません。</li>
           <li>localStorageのデータはブラウザの設定から削除できます。</li>
         </ul>
       </div>
@@ -604,6 +601,7 @@ body {
         <ul class="article-list">
           <li>データの保護にはSupabaseの標準的なセキュリティ機能（暗号化通信・認証）を使用しています。</li>
           <li>完全なセキュリティを保証するものではありません。重要な個人情報の入力は必要最小限にとどめることを推奨します。</li>
+          <li>個人データの漏洩が発生した場合、速やかに該当するユーザーへの通知および関係機関への報告を行います。</li>
         </ul>
       </div>
 
@@ -619,7 +617,7 @@ body {
       <div class="article-item" id="pp-update">
         <div class="article-title">10. 規約・ポリシーの変更</div>
         <div class="article-body">
-          内容を変更する場合は本ページに掲載します。重要な変更の場合は、アプリ内または登録メールアドレスへの通知を行います。
+          内容を変更する場合は本ページに掲載します。重要な変更の場合は、アプリ内での告知を行います。
         </div>
       </div>
 
@@ -627,13 +625,73 @@ body {
       <div class="article-item" id="pp-contact">
         <div class="article-title">11. お問い合わせ</div>
         <div class="article-body">
-          本サービスに関するご質問・データ削除依頼はX（<a href="https://x.com/genkai_ryoshi" target="_blank" rel="noopener" style="color:var(--sage-green-dark);">@genkai_ryoshi</a>）またはnoteのメッセージ機能よりご連絡ください。
+          本サービスに関するご質問・データ削除依頼はメール（<a href="mailto:genkai.ryoshi@gmail.com" style="color:var(--sage-green-dark);">genkai.ryoshi@gmail.com</a>）、X（<a href="https://x.com/genkai_ryoshi" target="_blank" rel="noopener" style="color:var(--sage-green-dark);">@genkai_ryoshi</a>）、またはnoteのメッセージ機能よりご連絡ください。
         </div>
       </div>
 
       <div class="article-note">
         川村伎海（限界漁師）が個人で運営するサービスです。
       </div>
+    </section>
+
+    <div class="section-divider" data-label="特定商取引法"></div>
+
+    <!-- ===== 特定商取引法に基づく表記 ===== -->
+    <section class="policy-section" id="tokusho">
+      <div class="policy-section-header">
+        <div class="policy-section-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="3" width="14" height="12" rx="2" stroke="#2ECC71" stroke-width="1.6"/>
+            <path d="M6 7h6M6 10.5h4" stroke="#2ECC71" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h2 class="policy-section-title font-mincho">特定商取引法に基づく表記</h2>
+      </div>
+
+      <table class="tokusho-table">
+        <tbody>
+          <tr>
+            <th>販売事業者</th>
+            <td>川村伎海</td>
+          </tr>
+          <tr>
+            <th>所在地</th>
+            <td>請求があった場合に遅滞なく開示いたします</td>
+          </tr>
+          <tr>
+            <th>電話番号</th>
+            <td>請求があった場合に遅滞なく開示いたします</td>
+          </tr>
+          <tr>
+            <th>メールアドレス</th>
+            <td><a href="mailto:genkai.ryoshi@gmail.com" style="color:var(--sage-green-dark);">genkai.ryoshi@gmail.com</a></td>
+          </tr>
+          <tr>
+            <th>販売価格</th>
+            <td>アプリ内の設定画面に表示された金額</td>
+          </tr>
+          <tr>
+            <th>支払方法</th>
+            <td>クレジットカード（Stripe経由）/ アクセスコード</td>
+          </tr>
+          <tr>
+            <th>支払時期</th>
+            <td>クレジットカード決済は申込時に即時決済</td>
+          </tr>
+          <tr>
+            <th>商品の引渡時期</th>
+            <td>決済完了後、即時利用可能</td>
+          </tr>
+          <tr>
+            <th>返品・キャンセル</th>
+            <td>デジタルサービスのため返品不可。有料プランはいつでも解約可能（解約月末まで利用可能。日割り返金なし）</td>
+          </tr>
+          <tr>
+            <th>動作環境</th>
+            <td>モダンブラウザ（Chrome, Safari, Edge等の最新版）</td>
+          </tr>
+        </tbody>
+      </table>
     </section>
 
   </div>
