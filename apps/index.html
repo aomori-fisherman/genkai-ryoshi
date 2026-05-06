@@ -666,7 +666,7 @@ body {
     <span class="section-label">PRICING</span>
     <h2 class="section-title font-mincho">シンプルな料金体系</h2>
     <p class="section-desc">まず無料で使ってみる。継続したくなったらProへ。</p>
-    <div class="pricing-grid pricing-grid-4">
+    <div class="pricing-grid">
 
       <!-- Free -->
       <div class="pricing-card pricing-card-free">
@@ -679,61 +679,37 @@ body {
           <li>写真分析（回数無制限）</li>
           <li>食材のg数編集</li>
           <li>姿勢チェック</li>
-          <li>履歴保存なし</li>
         </ul>
         <a href="https://genkairyoshi-sage.hf.space" target="_blank" rel="noopener" class="btn-pricing-free">今すぐ無料で試す</a>
       </div>
 
-      <!-- Standard -->
+      <!-- Pro -->
       <div class="pricing-card pricing-card-pro">
-        <div class="pricing-badge badge-pro">BASIC <span class="badge-coming">Coming Soon</span></div>
-        <div class="pricing-plan-name font-mincho">Basic</div>
-        <div class="pricing-price">¥500<span style="font-size:1rem;font-weight:500;color:var(--text-light)">/月</span></div>
-        <div class="pricing-note">年額 ¥3,900（¥325/月）</div>
-        <div class="pricing-divider"></div>
-        <ul class="pricing-list">
-          <li>Sage + Cactus</li>
-          <li>全履歴の保存</li>
-          <li>週次PFCレポート自動生成</li>
-          <li>体重連動・減量ペース判定</li>
-          <li>姿勢改善の経過記録</li>
-        </ul>
-        <div class="btn-pricing-pro">準備中</div>
-      </div>
-
-      <!-- Trainee -->
-      <div class="pricing-card pricing-card-trainee">
-        <div class="pricing-badge badge-trainee">GYM <span class="badge-coming">Coming Soon</span></div>
-        <div class="pricing-plan-name font-mincho">Gym</div>
-        <div class="pricing-price">¥660<span style="font-size:1rem;font-weight:500;color:var(--text-light)">/月</span></div>
-        <div class="pricing-note">Basicの全機能 + トレーニングログ</div>
-        <div class="pricing-divider"></div>
-        <ul class="pricing-list">
-          <li>Basicの全機能</li>
-          <li>部位別種目選択</li>
-          <li>重量・レップ・セット記録</li>
-          <li>トレーニング履歴閲覧</li>
-        </ul>
-        <div class="btn-pricing-pro">準備中</div>
-      </div>
-
-      <!-- Stage -->
-      <div class="pricing-card pricing-card-proplus">
-        <div class="pricing-badge badge-pro">PRO <span class="badge-coming">Coming Soon</span></div>
+        <div class="pricing-badge badge-pro">PRO</div>
         <div class="pricing-plan-name font-mincho">Pro</div>
-        <div class="pricing-price">¥880<span style="font-size:1rem;font-weight:500;color:var(--text-light)">/月</span></div>
-        <div class="pricing-note">年額 ¥7,800（¥650/月）</div>
+        <div class="pricing-price">¥660<span style="font-size:1rem;font-weight:500;color:var(--text-light)">/月</span></div>
+        <div class="pricing-note">年額 ¥6,600（2ヶ月分お得）</div>
         <div class="pricing-divider"></div>
         <ul class="pricing-list">
-          <li>Basicの全機能</li>
-          <li>Bloom（ポージング分析）</li>
-          <li>ポージング比較・経過記録</li>
+          <li>Freeの全機能</li>
+          <li>全履歴の保存・閲覧</li>
+          <li>トレーニングログ（部位・重量・セット記録）</li>
+          <li>週次PFCレポート・AI分析</li>
+          <li>体重連動・減量ペース判定</li>
           <li>大会カウントダウン</li>
-          <li>競技者向け</li>
         </ul>
-        <div class="btn-pricing-pro">準備中</div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <a href="https://buy.stripe.com/test_28EfZa5GK3ygcWXclOdby00" target="_blank" rel="noopener" class="btn-pricing-free" style="text-decoration:none;">月額 ¥660で始める</a>
+          <a href="https://buy.stripe.com/test_9B67sEedg5Go9KL2Ledby01" target="_blank" rel="noopener" class="btn-pricing-pro" style="text-decoration:none; border:1px solid rgba(34,184,207,.3); color:var(--sea-light);">年額 ¥6,600（2ヶ月お得）</a>
+        </div>
       </div>
 
+    </div>
+
+    <!-- Free+ Banner -->
+    <div style="max-width:760px; margin:20px auto 0; background:rgba(34,184,207,.06); border:1px solid rgba(34,184,207,.2); border-radius:12px; padding:20px 28px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+      <p style="font-size:.9rem; color:var(--text-mid); line-height:1.7; margin:0;">メールアドレスを登録するだけで、食事履歴の保存・トレーニングログが無料で使えるようになります</p>
+      <a href="#waitlist" style="font-size:.88rem; font-weight:700; color:var(--sea-light); text-decoration:none; white-space:nowrap;">Free+にアップグレード &rarr;</a>
     </div>
   </div>
 </section>
@@ -741,9 +717,9 @@ body {
 <!-- Waitlist -->
 <section class="waitlist-section" id="waitlist">
   <div class="container" style="text-align:center; max-width:560px;">
-    <h2 class="section-title font-mincho">公開時に通知を受け取る</h2>
-    <p class="section-desc">Basic / Pro プランの公開時にメールでお知らせします。</p>
-    <a href="https://preview.mailerlite.io/forms/2195119/186489987044214293/share" target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex; margin-top:24px; text-decoration:none;">メールアドレスを登録する</a>
+    <h2 class="section-title font-mincho">Free+にアップグレード</h2>
+    <p class="section-desc">メールアドレスを登録すると、食事履歴・トレーニングログが無料で使えるFree+にアップグレードされます。</p>
+    <a href="https://preview.mailerlite.io/forms/2195119/186489987044214293/share" target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex; margin-top:24px; text-decoration:none;">Free+にアップグレードする</a>
     <p style="font-size:.75rem; color:var(--text-light); margin-top:12px;">スパムは送りません。公開通知のみ。</p>
   </div>
 </section>
