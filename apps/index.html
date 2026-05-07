@@ -188,7 +188,6 @@ body {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
 }
 .app-card-sage::before { background: linear-gradient(90deg, var(--sea-bright), #6be4f5); }
-.app-card-cactus::before { background: linear-gradient(90deg, #4ade80, #86efac); }
 
 .app-icon {
   width: 56px; height: 56px; border-radius: 14px;
@@ -196,14 +195,12 @@ body {
   font-size: 1.6rem; margin-bottom: 22px;
 }
 .app-icon-sage { background: var(--sea-pale); }
-.app-icon-cactus { background: #f0fdf4; }
 
 .app-name {
   font-family: 'Shippori Mincho', serif;
   font-size: 1.4rem; font-weight: 800; margin-bottom: 4px;
 }
 .app-name-sage { color: var(--sea-deep); }
-.app-name-cactus { color: #166534; }
 
 .app-tagline {
   font-size: .85rem; font-weight: 700; margin-bottom: 20px;
@@ -231,10 +228,6 @@ body {
   background-color: var(--sea-pale);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.5 8L6.5 11L12.5 5' stroke='%2322b8cf' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
-.app-card-cactus .app-features li::before {
-  background-color: #f0fdf4;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.5 8L6.5 11L12.5 5' stroke='%234ade80' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-}
 
 .btn-app {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
@@ -248,11 +241,6 @@ body {
   box-shadow: 0 4px 18px rgba(34,184,207,.3);
 }
 .btn-app-sage:hover { background: #1aa8bd; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(34,184,207,.4); }
-.btn-app-cactus {
-  background: #22c55e; color: #fff;
-  box-shadow: 0 4px 18px rgba(34,197,94,.3);
-}
-.btn-app-cactus:hover { background: #16a34a; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(34,197,94,.4); }
 
 .btn-app::after { content: '\2192'; font-size: 1rem; }
 
@@ -584,8 +572,8 @@ body {
 <section class="apps-section" id="apps">
   <div class="container">
     <span class="section-label">TOOLS</span>
-    <h2 class="section-title font-mincho">2つのAIツール</h2>
-    <p class="section-desc">食事と姿勢。ボディメイクで変えるべきものはこの2つだけ。どちらもスマホ1台で完結する。</p>
+    <h2 class="section-title font-mincho">AIツール「SAGE」</h2>
+    <p class="section-desc">食事管理と姿勢診断。ボディメイクで変えるべきものはこの2つだけ。スマホ1台で完結する。</p>
     <div class="app-grid">
 
       <!-- Sage -->
@@ -603,29 +591,9 @@ body {
           <li>食事の写真を撮るだけでPFC・カロリーを自動計算</li>
           <li>食材のg数をその場で修正可能</li>
           <li>食事管理アプリが続かなかった人へ</li>
+          <li>姿勢診断AI「Cactus」搭載 — 全身写真で猫背・反り腰を検出</li>
         </ul>
         <a href="https://genkairyoshi-sage.hf.space" target="_blank" rel="noopener" class="btn-app btn-app-sage">Sageを試す</a>
-      </div>
-
-      <!-- Cactus -->
-      <div class="app-card app-card-cactus">
-        <div class="app-icon app-icon-cactus">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="12" y="3" width="4" height="18" rx="2" stroke="#22c55e" stroke-width="2"/>
-            <path d="M14 21V25" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/>
-            <path d="M9 25H19" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/>
-            <path d="M12 10H8a2 2 0 01-2-2V6" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/>
-            <path d="M16 14h4a2 2 0 002-2v-2" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="app-name app-name-cactus">Cactus</div>
-        <div class="app-tagline">AI姿勢分析 — 全身を撮るだけ</div>
-        <ul class="app-features">
-          <li>スマホで全身を撮るだけで姿勢の歪みを検出</li>
-          <li>巻き肩・反り腰・ストレートネックを可視化</li>
-          <li>改善エクササイズを自動提案</li>
-        </ul>
-        <a href="https://genkairyoshi-cactus.hf.space" target="_blank" rel="noopener" class="btn-app btn-app-cactus">Cactusを試す</a>
       </div>
 
     </div>
