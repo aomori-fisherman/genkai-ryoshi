@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>限界漁師 チラシ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 210mm;
+      height: 297mm;
+      background: #000;
+      font-family: 'Noto Sans JP', sans-serif;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      background: #0a0a0a;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* ========== HEADER ========== */
+    .header {
+      background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);
+      padding: 10mm 10mm 6mm;
+      text-align: center;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .header::after {
+      content: '';
+      display: block;
+      width: 60mm;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #c9a227, transparent);
+      margin: 4mm auto 0;
+    }
+
+    .title {
+      font-size: 22mm;
+      font-weight: 900;
+      color: #c9a227;
+      letter-spacing: 0.12em;
+      line-height: 1;
+      text-shadow: 0 0 20px rgba(201, 162, 39, 0.4);
+    }
+
+    .subtitle {
+      font-size: 4mm;
+      font-weight: 700;
+      color: #aaa;
+      letter-spacing: 0.3em;
+      margin-top: 2mm;
+    }
+
+    .catchcopy {
+      font-size: 5.5mm;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.15em;
+      margin-top: 2.5mm;
+    }
+
+    /* ========== MAIN VISUAL ========== */
+    .main-visual {
+      position: relative;
+      flex: 0 0 auto;
+      height: 82mm;
+      overflow: hidden;
+    }
+
+    .main-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .main-visual::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 18mm;
+      background: linear-gradient(180deg, #0a0a0a 0%, transparent 100%);
+      z-index: 1;
+    }
+
+    .main-visual::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 22mm;
+      background: linear-gradient(0deg, #0a0a0a 0%, transparent 100%);
+      z-index: 1;
+    }
+
+    /* ========== 2-COLUMN CONTENT ========== */
+    .content-area {
+      display: flex;
+      gap: 0;
+      padding: 5mm 8mm 4mm;
+      flex-shrink: 0;
+    }
+
+    .col {
+      flex: 1;
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 2mm;
+      padding: 5mm;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .col:first-child {
+      margin-right: 4mm;
+      border-top: 2px solid #c9a227;
+    }
+
+    .col:last-child {
+      border-top: 2px solid #1a9a8a;
+    }
+
+    .col-label {
+      font-size: 2.8mm;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 2mm;
+    }
+
+    .col:first-child .col-label {
+      color: #c9a227;
+    }
+
+    .col:last-child .col-label {
+      color: #1a9a8a;
+    }
+
+    .col-title {
+      font-size: 5.5mm;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 2.5mm;
+      letter-spacing: 0.05em;
+    }
+
+    .col-desc {
+      font-size: 3.2mm;
+      color: #bbb;
+      line-height: 1.7;
+      margin-bottom: 3mm;
+    }
+
+    .qr-img {
+      width: 22mm;
+      height: 22mm;
+      border: 1.5px solid #333;
+      border-radius: 1mm;
+      margin-bottom: 2.5mm;
+      background: #fff;
+      padding: 1px;
+    }
+
+    .col-cta {
+      font-size: 3.5mm;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 1.5mm 5mm;
+      border-radius: 1mm;
+    }
+
+    .col:first-child .col-cta {
+      color: #c9a227;
+      border: 1px solid #c9a227;
+    }
+
+    .col:last-child .col-cta {
+      color: #1a9a8a;
+      border: 1px solid #1a9a8a;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 2.5mm;
+      font-weight: 700;
+      background: #1a9a8a;
+      color: #fff;
+      padding: 0.8mm 2.5mm;
+      border-radius: 0.8mm;
+      margin-bottom: 2mm;
+      letter-spacing: 0.1em;
+    }
+
+    /* ========== NOTE BAR ========== */
+    .note-bar {
+      background: linear-gradient(90deg, #111 0%, #181818 50%, #111 100%);
+      border-top: 1px solid #222;
+      border-bottom: 1px solid #222;
+      padding: 4mm 10mm;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      margin: 0 0 0 0;
+    }
+
+    .note-bar-left {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .note-label {
+      font-size: 2.8mm;
+      font-weight: 700;
+      color: #888;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1mm;
+    }
+
+    .note-text {
+      font-size: 4mm;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.5;
+    }
+
+    .note-text span {
+      color: #c9a227;
+    }
+
+    .note-url {
+      font-size: 3.5mm;
+      color: #888;
+      letter-spacing: 0.05em;
+      margin-top: 1mm;
+    }
+
+    .note-icon {
+      width: 14mm;
+      height: 14mm;
+      background: #41c9b0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .note-icon-text {
+      font-size: 6mm;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.05em;
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      background: #000;
+      border-top: 1px solid #1a1a1a;
+      padding: 4mm 10mm;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      margin-top: auto;
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 1mm;
+    }
+
+    .footer-item {
+      font-size: 3mm;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 2mm;
+    }
+
+    .footer-item .footer-label {
+      font-size: 2.5mm;
+      font-weight: 700;
+      color: #444;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      min-width: 6mm;
+    }
+
+    .footer-item .footer-value {
+      color: #888;
+      font-size: 3mm;
+    }
+
+    .footer-tagline {
+      font-size: 2.8mm;
+      font-weight: 700;
+      color: #333;
+      letter-spacing: 0.2em;
+      text-align: right;
+    }
+
+    .footer-tagline span {
+      color: #c9a227;
+      opacity: 0.7;
+    }
+
+    @media print {
+      html, body {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        padding: 0;
+      }
+
+      .page {
+        width: 210mm;
+        height: 297mm;
+        page-break-after: avoid;
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="subtitle">青森のホタテ漁師 × ボディビルダー</div>
+      <div class="title">限界漁師</div>
+      <div class="catchcopy">海で鍛え、鉄で磨く。</div>
+    </div>
+
+    <!-- MAIN VISUAL -->
+    <div class="main-visual">
+      <img src="competition-photo.jpg" alt="大会写真">
+    </div>
+
+    <!-- 2-COLUMN CONTENT -->
+    <div class="content-area">
+
+      <!-- LEFT: Instagram -->
+      <div class="col">
+        <div class="col-label">Instagram</div>
+        <div class="col-title">@genkai_ryoshi</div>
+        <div class="col-desc">
+          減量の日常・トレーニング・<br>漁師メシを毎日発信中
+        </div>
+        <img
+          class="qr-img"
+          src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://www.instagram.com/genkai_ryoshi/"
+          alt="Instagram QR"
+        >
+        <div class="col-cta">フォローする</div>
+      </div>
+
+      <!-- RIGHT: SAGE -->
+      <div class="col">
+        <div class="col-label">AI食事管理アプリ</div>
+        <div class="col-title">SAGE</div>
+        <div class="badge">無料で使える</div>
+        <div class="col-desc">
+          食事写真を撮るだけでPFC自動算出<br>
+          トレーニング記録・体重管理<br>
+          AIポージング分析
+        </div>
+        <img
+          class="qr-img"
+          src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://genkairyoshi-sage.hf.space"
+          alt="SAGE QR"
+        >
+        <div class="col-cta">今すぐ試す</div>
+      </div>
+
+    </div>
+
+    <!-- NOTE BAR -->
+    <div class="note-bar">
+      <div class="note-bar-left">
+        <div class="note-label">note</div>
+        <div class="note-text">減量レシピ・減量日記を<span>無料公開中</span></div>
+        <div class="note-url">note.com/genkai_ryoshi</div>
+      </div>
+      <div class="note-icon">
+        <div class="note-icon-text">n</div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-left">
+        <div class="footer-item">
+          <span class="footer-label">HP</span>
+          <span class="footer-value">aomori-fisherman.github.io/genkai-ryoshi/</span>
+        </div>
+        <div class="footer-item">
+          <span class="footer-label">X</span>
+          <span class="footer-value">@genkai_ryoshi</span>
+        </div>
+      </div>
+      <div class="footer-tagline">
+        <span>限界漁師</span> — 2026
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
