@@ -105,7 +105,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #fff;
+      background: #fefcf7;
       border-radius: 3mm;
       overflow: hidden;
     }
@@ -148,10 +148,6 @@
       border-top: 2.5px solid #1a9a8a;
     }
 
-    .feature-col.cactus {
-      border-top: 2.5px solid #a78bfa;
-    }
-
     .col-label {
       font-size: 2.5mm;
       font-weight: 700;
@@ -166,10 +162,6 @@
 
     .feature-col.sage .col-label {
       color: #1a9a8a;
-    }
-
-    .feature-col.cactus .col-label {
-      color: #a78bfa;
     }
 
     .col-title {
@@ -193,10 +185,6 @@
 
     .feature-col.sage .badge {
       background: #1a9a8a;
-    }
-
-    .feature-col.cactus .badge {
-      background: #a78bfa;
     }
 
     .col-desc {
@@ -233,10 +221,6 @@
 
     .feature-col.sage .col-cta {
       background: #1a9a8a;
-    }
-
-    .feature-col.cactus .col-cta {
-      background: #a78bfa;
     }
 
     /* ========== NOTE BAR ========== */
@@ -400,7 +384,7 @@
       </div>
     </div>
 
-    <!-- 3-COLUMN FEATURES -->
+    <!-- 2-COLUMN FEATURES -->
     <div class="features-area">
 
       <!-- Instagram -->
@@ -420,14 +404,16 @@
 
       <!-- SAGE -->
       <div class="feature-col sage">
-        <div class="col-label">AI食事管理アプリ</div>
+        <div class="col-label">AI食事・トレーニング管理アプリ</div>
         <div class="col-title">SAGE</div>
         <div class="badge">無料</div>
         <div class="col-desc">
           ・食事写真→PFC自動算出<br>
-          ・トレーニング記録<br>
-          ・体重管理・推移グラフ<br>
-          ・週次AIレポート
+          ・トレーニング記録・体重管理<br>
+          ・週次AIレポート<br>
+          ・<strong>姿勢診断AI「Cactus」搭載</strong><br>
+          　全身写真1枚で猫背・反り腰を検出<br>
+          　改善エクササイズを提案
         </div>
         <img
           class="qr-img"
@@ -435,25 +421,6 @@
           alt="SAGE QR"
         >
         <div class="col-cta">今すぐ試す</div>
-      </div>
-
-      <!-- Cactus -->
-      <div class="feature-col cactus">
-        <div class="col-label">AI姿勢分析</div>
-        <div class="col-title">Cactus</div>
-        <div class="badge">無料</div>
-        <div class="col-desc">
-          ・全身写真1枚で姿勢をAI分析<br>
-          ・猫背・反り腰・O脚など検出<br>
-          ・改善エクササイズ提案<br>
-          ・大会ポージングチェックにも
-        </div>
-        <img
-          class="qr-img"
-          src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://genkairyoshi-sage.hf.space"
-          alt="Cactus QR"
-        >
-        <div class="col-cta">チェックする</div>
       </div>
 
     </div>
