@@ -1,7 +1,7 @@
 {
   "name": "Sage — AI食事PFC分析",
   "short_name": "Sage",
-  "start_url": "https://genkairyoshi-sage.hf.space",
+  "start_url": "https://sage-next-nine.vercel.app",
   "display": "standalone",
   "background_color": "#0e1117",
   "theme_color": "#0e1117",
