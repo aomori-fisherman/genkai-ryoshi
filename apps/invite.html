@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VCTLNYH6NP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-VCTLNYH6NP');
+</script>
+<title>SAGE - AI食事管理・トレーニング記録アプリ</title>
+<meta name="description" content="写真を撮るだけでAIがPFC自動計算。トレーニング記録・AIコーチ・レポート機能搭載。無料で今すぐ始められる。"/>
+<meta property="og:title" content="SAGE - AI食事管理・トレーニング記録アプリ"/>
+<meta property="og:description" content="写真を撮るだけでAIがPFC自動計算。トレーニング記録・AIコーチ・レポート機能搭載。無料で今すぐ始められる。"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://aomori-fisherman.github.io/genkai-ryoshi/apps/invite.html"/>
+<link rel="apple-touch-icon" sizes="180x180" href="../sage-icon-180.png"/>
+<link rel="icon" type="image/png" sizes="192x192" href="../sage-icon-192.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho:wght@400;600;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --green: #2ECC71;
+  --green-dark: #27ae60;
+  --green-light: #a8e6cf;
+  --green-pale: #eafaf1;
+  --text: #1a1a2e;
+  --text-mid: #4a4a5a;
+  --text-light: #7a7a8a;
+  --white: #ffffff;
+  --bg: #fafafa;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  color: var(--text);
+  background: var(--white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+.font-mincho { font-family: 'Shippori Mincho', serif; }
+
+.container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+/* ── Hero ── */
+.hero {
+  text-align: center;
+  padding: 80px 0 56px;
+  background: linear-gradient(170deg, var(--green-pale) 0%, var(--white) 100%);
+}
+.hero-logo {
+  font-size: 2.6rem;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+.hero-logo-text {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--green-dark);
+  letter-spacing: .08em;
+}
+.hero-tagline {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-mid);
+  margin-bottom: 16px;
+  letter-spacing: .04em;
+}
+.hero-desc {
+  font-size: .95rem;
+  color: var(--text-mid);
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* ── Features ── */
+.features {
+  padding: 64px 0;
+}
+.features-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.feature-card {
+  background: var(--white);
+  border: 1px solid rgba(46,204,113,.15);
+  border-radius: 16px;
+  padding: 32px 24px;
+  transition: transform .2s, box-shadow .2s;
+}
+.feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 36px rgba(46,204,113,.12);
+}
+.feature-icon {
+  font-size: 1.8rem;
+  margin-bottom: 14px;
+}
+.feature-name {
+  font-weight: 700;
+  font-size: .95rem;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.feature-desc {
+  font-size: .85rem;
+  color: var(--text-mid);
+  line-height: 1.65;
+}
+
+/* ── Plans ── */
+.plans {
+  padding: 64px 0;
+  background: var(--bg);
+}
+.plans-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.plan-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 32px 24px;
+  border: 1px solid rgba(0,0,0,.07);
+  display: flex;
+  flex-direction: column;
+}
+.plan-card-pro {
+  border-color: var(--green);
+  position: relative;
+}
+.plan-card-pro::before {
+  content: 'おすすめ';
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--green);
+  color: #fff;
+  font-size: .7rem;
+  font-weight: 700;
+  padding: 3px 14px;
+  border-radius: 100px;
+  letter-spacing: .06em;
+}
+.plan-label {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: var(--green-dark);
+  margin-bottom: 8px;
+}
+.plan-name {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.plan-price {
+  font-size: 1.6rem;
+  font-weight: 900;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+.plan-price span {
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--text-light);
+}
+.plan-note {
+  font-size: .78rem;
+  color: var(--text-light);
+  margin-bottom: 20px;
+}
+.plan-divider {
+  height: 1px;
+  background: rgba(0,0,0,.06);
+  margin-bottom: 20px;
+}
+.plan-features {
+  list-style: none;
+  flex: 1;
+  margin-bottom: 0;
+}
+.plan-features li {
+  font-size: .85rem;
+  color: var(--text-mid);
+  padding: 7px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+}
+.plan-features li::before {
+  content: '';
+  display: block;
+  min-width: 14px;
+  height: 14px;
+  margin-top: 2px;
+  border-radius: 50%;
+  background-color: var(--green-pale);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.5 8L6.5 11L12.5 5' stroke='%232ECC71' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* ── CTA ── */
+.cta {
+  padding: 72px 0;
+  text-align: center;
+}
+.cta-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+.cta-desc {
+  font-size: .93rem;
+  color: var(--text-mid);
+  line-height: 1.7;
+  margin-bottom: 32px;
+  max-width: 440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--green);
+  color: #fff;
+  padding: 16px 40px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform .15s, box-shadow .2s, background .2s;
+  box-shadow: 0 4px 20px rgba(46,204,113,.35);
+}
+.btn-cta:hover {
+  background: var(--green-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(46,204,113,.45);
+}
+.btn-cta::after {
+  content: '\2192';
+  font-size: 1.1rem;
+}
+.cta-sub {
+  font-size: .78rem;
+  color: var(--text-light);
+  margin-top: 14px;
+}
+
+/* ── Footer ── */
+.footer {
+  background: var(--bg);
+  padding: 40px 0 28px;
+  border-top: 1px solid rgba(0,0,0,.06);
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.footer-brand {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: .04em;
+}
+.footer-brand span { color: var(--green); }
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.footer-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: .8rem;
+  font-weight: 500;
+  transition: color .2s;
+}
+.footer-links a:hover { color: var(--green); }
+.footer-copy {
+  width: 100%;
+  text-align: center;
+  color: var(--text-light);
+  font-size: .72rem;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0,0,0,.05);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .hero { padding: 60px 0 44px; }
+  .hero-logo { font-size: 2.2rem; }
+  .hero-logo-text { font-size: 1.7rem; }
+  .features-grid { grid-template-columns: 1fr; }
+  .plans-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+  .plan-card-pro { order: -1; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 18px; }
+  .hero { padding: 48px 0 36px; }
+  .btn-cta { padding: 14px 32px; font-size: .93rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-logo">&#x1F33F;</div>
+    <div class="hero-logo-text">SAGE</div>
+    <p class="hero-tagline">AI食事管理・トレーニング記録アプリ</p>
+    <p class="hero-desc">写真を撮るだけで食事のPFCを自動計算。トレーニング記録・AIコーチ・体重管理まで、ボディメイクに必要な全てが1つのアプリで完結する。</p>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="features">
+  <div class="container">
+    <h2 class="features-title font-mincho">SAGEでできること</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">&#x1F4F8;</div>
+        <div class="feature-name">写真を撮るだけでPFC自動計算</div>
+        <p class="feature-desc">食事の写真をAIが解析し、カロリー・タンパク質・脂質・炭水化物を自動で算出。手入力は一切不要。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#x1F3CB;&#xFE0F;</div>
+        <div class="feature-name">トレーニング記録・ボリューム管理</div>
+        <p class="feature-desc">種目・重量・レップ数を記録。週次ボリュームの推移を自動で可視化し、過負荷を防ぐ。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#x1F916;</div>
+        <div class="feature-name">AIコーチが週次フィードバック</div>
+        <p class="feature-desc">食事とトレーニングのデータをもとに、AIコーチが改善点と次のアクションを提案してくれる。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#x1F4CA;</div>
+        <div class="feature-name">レポート・体重推移を可視化</div>
+        <p class="feature-desc">体重・PFC・トレーニングボリュームをグラフで一覧表示。変化の傾向が一目でわかる。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Plans -->
+<section class="plans">
+  <div class="container">
+    <h2 class="plans-title font-mincho">シンプルな料金プラン</h2>
+    <div class="plans-grid">
+
+      <!-- Free -->
+      <div class="plan-card">
+        <div class="plan-label">FREE</div>
+        <div class="plan-name font-mincho">Free</div>
+        <div class="plan-price">&yen;0</div>
+        <div class="plan-note">登録不要・今すぐ使える</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>食事AI分析（1日3回）</li>
+          <li>トレーニング記録</li>
+        </ul>
+      </div>
+
+      <!-- Free+ -->
+      <div class="plan-card">
+        <div class="plan-label">FREE+</div>
+        <div class="plan-name font-mincho">Free+</div>
+        <div class="plan-price">&yen;0</div>
+        <div class="plan-note">メール登録で解放</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>食事AI分析（1日5回）</li>
+          <li>食事履歴の保存</li>
+          <li>トレーニング記録</li>
+        </ul>
+      </div>
+
+      <!-- Pro -->
+      <div class="plan-card plan-card-pro">
+        <div class="plan-label">PRO</div>
+        <div class="plan-name font-mincho">Pro</div>
+        <div class="plan-price">&yen;660<span>/月</span></div>
+        <div class="plan-note">全機能解放</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>AI分析 無制限</li>
+          <li>AIコーチ</li>
+          <li>レポート全機能</li>
+          <li>CSV出力</li>
+          <li>登録メニュー</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container">
+    <h2 class="cta-title font-mincho">まず無料で試してみる</h2>
+    <p class="cta-desc">アカウント登録なしで食事AI分析がすぐに使える。続けたくなったらアップグレード。</p>
+    <a href="https://sage-next-nine.vercel.app/register" target="_blank" rel="noopener" class="btn-cta">SAGEを始める</a>
+    <p class="cta-sub">登録不要・無料で今すぐ使えます</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <a href="../index.html" class="footer-brand">&#x1F33F; <span>SAGE</span></a>
+      <div class="footer-links">
+        <a href="privacy.html">利用規約・プライバシーポリシー</a>
+        <a href="index.html">アプリトップ</a>
+      </div>
+    </div>
+    <div class="footer-copy">
+      &copy; 2026 限界漁師
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
