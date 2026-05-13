@@ -339,9 +339,195 @@ body {
   .hero { padding: 48px 0 36px; }
   .btn-cta { padding: 14px 32px; font-size: .93rem; }
 }
+/* ── アプリ内ブラウザ警告バナー ── */
+#iab-warning {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 9999;
+  background: #FEF3C7;
+  border-bottom: 2px solid #F59E0B;
+  padding: 14px 20px;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  box-shadow: 0 2px 12px rgba(0,0,0,.12);
+}
+#iab-warning-title {
+  font-weight: 700;
+  font-size: .95rem;
+  color: #92400E;
+  margin-bottom: 6px;
+}
+#iab-warning-body {
+  font-size: .85rem;
+  color: #78350F;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+#iab-warning-escape {
+  font-size: .78rem;
+  color: #A16207;
+  margin-bottom: 10px;
+}
+.iab-warning-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.iab-btn-open {
+  background: #D97706;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 18px;
+  font-size: .85rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+.iab-btn-copy {
+  background: #FEF9C3;
+  color: #92400E;
+  border: 1px solid #F59E0B;
+  border-radius: 8px;
+  padding: 9px 18px;
+  font-size: .85rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+#iab-toast {
+  font-size: .78rem;
+  color: #92400E;
+  margin-top: 6px;
+  display: none;
+}
+/* バナー表示時に body を押し下げる */
+body.iab-detected {
+  padding-top: 200px;
+}
+@media (max-width: 480px) {
+  body.iab-detected { padding-top: 240px; }
+  .iab-warning-actions { flex-direction: column; }
+  .iab-btn-open, .iab-btn-copy { width: 100%; text-align: center; }
+}
 </style>
 </head>
 <body>
+
+<!-- アプリ内ブラウザ警告バナー（LINE等でGoogleログイン不可の場合に表示） -->
+<div id="iab-warning" style="display:none;" role="alert" aria-live="assertive">
+  <div id="iab-warning-title">⚠ ブラウザで開いてください</div>
+  <div id="iab-warning-body">LINE・Instagram等のアプリ内ブラウザでは Googleログインが使えません。Safari か Chrome で開いてください。</div>
+  <div id="iab-warning-escape">※ メールアドレスでの登録なら、このまま続行できます</div>
+  <div class="iab-warning-actions">
+    <button class="iab-btn-open" id="iab-btn-open" type="button" onclick="iabOpenExternal()">ブラウザで開く</button>
+    <button class="iab-btn-copy" type="button" onclick="iabCopyUrl()">URLをコピー</button>
+  </div>
+  <div id="iab-toast"></div>
+</div>
+
+<script>
+(function() {
+  var ua = navigator.userAgent.toLowerCase();
+  var type = null;
+
+  if (ua.indexOf('line/') !== -1) type = 'line';
+  else if (ua.indexOf('instagram') !== -1) type = 'instagram';
+  else if (ua.indexOf('fbav') !== -1 || ua.indexOf('fban') !== -1 || ua.indexOf('fb_iab') !== -1) type = 'facebook';
+  else if (ua.indexOf('twitterandroid') !== -1 || ua.indexOf('twitteriphone') !== -1 || ua.indexOf('twitter/') !== -1) type = 'twitter';
+  else if (ua.indexOf('musical_ly') !== -1 || ua.indexOf('tiktok') !== -1) type = 'tiktok';
+  else if (ua.indexOf('micromessenger') !== -1) type = 'wechat';
+  else if (ua.indexOf('gsa/') !== -1) type = 'gmail';
+  else if (ua.indexOf('slack/') !== -1) type = 'slack';
+  else if (ua.indexOf('discord/') !== -1) type = 'discord';
+  else if (ua.indexOf('teams/') !== -1 || ua.indexOf('microsoftteams') !== -1) type = 'teams';
+
+  if (!type) return;
+
+  // バナー表示
+  var banner = document.getElementById('iab-warning');
+  if (banner) banner.style.display = 'block';
+  document.body.classList.add('iab-detected');
+
+  // 外部ブラウザ起動URLを算出してボタンに設定
+  var currentUrl = window.location.href;
+  var externalUrl = null;
+
+  if (type === 'line') {
+    var sep = currentUrl.indexOf('?') !== -1 ? '&' : '?';
+    externalUrl = currentUrl + sep + 'openExternalBrowser=1';
+  } else if (type === 'instagram' || type === 'twitter' || type === 'tiktok') {
+    if (currentUrl.indexOf('https://') === 0) {
+      externalUrl = currentUrl.replace('https://', 'x-safari-https://');
+    }
+  } else {
+    if (currentUrl.indexOf('https://') === 0) {
+      var withoutScheme = currentUrl.replace('https://', '');
+      externalUrl = 'intent://' + withoutScheme + '#Intent;scheme=https;end;';
+    }
+  }
+
+  window._iabExternalUrl = externalUrl;
+  window._iabCurrentUrl = currentUrl;
+
+  // SAGEアプリへのリンクをすべてLINE対応URLに書き換え
+  if (type === 'line') {
+    document.querySelectorAll('a[href*="sage-next-nine.vercel.app"]').forEach(function(el) {
+      var href = el.getAttribute('href');
+      if (href) {
+        var sep2 = href.indexOf('?') !== -1 ? '&' : '?';
+        el.setAttribute('href', href + sep2 + 'openExternalBrowser=1');
+      }
+    });
+  }
+
+  // GA4 イベント発火
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'in_app_browser_detected', {
+      browser_type: type,
+      page_url: currentUrl
+    });
+  }
+})();
+
+function iabOpenExternal() {
+  var url = window._iabExternalUrl;
+  if (url) {
+    window.location.assign(url);
+  } else {
+    // フォールバック: URLコピーを案内
+    iabCopyUrl();
+  }
+}
+
+function iabCopyUrl() {
+  var url = window._iabCurrentUrl || window.location.href;
+  var toast = document.getElementById('iab-toast');
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(function() {
+      if (toast) { toast.textContent = 'コピーしたよ。Safari/Chrome に貼り付けてね'; toast.style.display = 'block'; }
+      setTimeout(function() { if (toast) toast.style.display = 'none'; }, 3000);
+    }).catch(function() {
+      if (toast) { toast.textContent = 'コピーに失敗しました。URLを手動でコピーしてください'; toast.style.display = 'block'; }
+      setTimeout(function() { if (toast) toast.style.display = 'none'; }, 3000);
+    });
+  } else {
+    // 旧ブラウザ対応
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = url;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      if (toast) { toast.textContent = 'コピーしたよ。Safari/Chrome に貼り付けてね'; toast.style.display = 'block'; }
+      setTimeout(function() { if (toast) toast.style.display = 'none'; }, 3000);
+    } catch(e) {
+      if (toast) { toast.textContent = 'コピーに失敗しました。URLを手動でコピーしてください'; toast.style.display = 'block'; }
+      setTimeout(function() { if (toast) toast.style.display = 'none'; }, 3000);
+    }
+  }
+}
+</script>
 
 <!-- Hero -->
 <section class="hero">
